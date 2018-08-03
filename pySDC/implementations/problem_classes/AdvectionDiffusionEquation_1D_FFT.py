@@ -45,7 +45,6 @@ class advectiondiffusion1d_imex(ptype):
         super(advectiondiffusion1d_imex, self).__init__(init=problem_params['nvars'], dtype_u=dtype_u, dtype_f=dtype_f,
                                                         params=problem_params)
 
-        # compute dx and get discretization matrix A
         self.xvalues = np.array([i * self.params.L / self.params.nvars - self.params.L / 2.0
                                  for i in range(self.params.nvars)])
 

@@ -3,12 +3,13 @@ from __future__ import division
 import numpy as np
 import pyfftw
 
+
 from pySDC.implementations.datatype_classes.mesh import mesh, rhs_imex_mesh
 from pySDC.core.SpaceTransfer import space_transfer
 from pySDC.core.Errors import TransferError
 
 
-class mesh_to_mesh_fft(space_transfer):
+class mesh_to_mesh_fft2d(space_transfer):
     """
     Custon base_transfer class, implements Transfer.py
 
@@ -29,23 +30,29 @@ class mesh_to_mesh_fft(space_transfer):
             params: parameters for the transfer operators
         """
         # invoke super initialization
-        super(mesh_to_mesh_fft, self).__init__(fine_prob, coarse_prob, params)
+        super(mesh_to_mesh_fft2d, self).__init__(fine_prob, coarse_prob, params)
+        # TODO: cleanup
+        assert len(self.fine_prob.params.nvars) == 2
+        assert len(self.coarse_prob.params.nvars) == 2
+        assert self.fine_prob.params.nvars[0] == self.fine_prob.params.nvars[1]
+        assert self.coarse_prob.params.nvars[0] == self.coarse_prob.params.nvars[1]
 
-        self.ratio = int(self.fine_prob.params.nvars / self.coarse_prob.params.nvars)
+        self.ratio = int(self.fine_prob.params.nvars[0] / self.coarse_prob.params.nvars[0])
 
         self.fft_in_fine = pyfftw.empty_aligned(self.fine_prob.init, dtype='complex128')
         self.fft_out_fine = pyfftw.empty_aligned(self.fine_prob.init, dtype='complex128')
         self.ifft_in_fine = pyfftw.empty_aligned(self.fine_prob.init, dtype='complex128')
         self.ifft_out_fine = pyfftw.empty_aligned(self.fine_prob.init, dtype='complex128')
-        self.fft_object_fine = pyfftw.FFTW(self.fft_in_fine, self.fft_out_fine, direction='FFTW_FORWARD')
-        self.ifft_object_fine = pyfftw.FFTW(self.ifft_in_fine, self.ifft_out_fine, direction='FFTW_BACKWARD')
+        self.fft_object_fine = pyfftw.FFTW(self.fft_in_fine, self.fft_out_fine, direction='FFTW_FORWARD', axes=(0, 1))
+        self.ifft_object_fine = pyfftw.FFTW(self.ifft_in_fine, self.ifft_out_fine, direction='FFTW_BACKWARD', axes=(0, 1))
 
         self.fft_in_coarse = pyfftw.empty_aligned(self.coarse_prob.init, dtype='complex128')
         self.fft_out_coarse = pyfftw.empty_aligned(self.coarse_prob.init, dtype='complex128')
         self.ifft_in_coarse = pyfftw.empty_aligned(self.coarse_prob.init, dtype='complex128')
         self.ifft_out_coarse = pyfftw.empty_aligned(self.coarse_prob.init, dtype='complex128')
-        self.fft_object_coarse = pyfftw.FFTW(self.fft_in_coarse, self.fft_out_coarse, direction='FFTW_FORWARD')
-        self.ifft_object_coarse = pyfftw.FFTW(self.ifft_in_coarse, self.ifft_out_coarse, direction='FFTW_BACKWARD')
+        self.fft_object_coarse = pyfftw.FFTW(self.fft_in_coarse, self.fft_out_coarse, direction='FFTW_FORWARD', axes=(0, 1))
+        self.ifft_object_coarse = pyfftw.FFTW(self.ifft_in_coarse, self.ifft_out_coarse, direction='FFTW_BACKWARD',
+                                            axes=(0, 1))
 
     def restrict(self, F):
         """
@@ -56,11 +63,11 @@ class mesh_to_mesh_fft(space_transfer):
         """
         if isinstance(F, mesh):
             G = mesh(self.coarse_prob.init, val=0.0)
-            G.values = F.values.flatten()[::self.ratio].reshape(self.coarse_prob.init)
+            G.values[:] = F.values[::self.ratio, ::self.ratio]
         elif isinstance(F, rhs_imex_mesh):
             G = rhs_imex_mesh(self.coarse_prob.init, val=0.0)
-            G.impl.values = F.impl.values.flatten()[::self.ratio].reshape(self.coarse_prob.init)
-            G.expl.values = F.expl.values.flatten()[::self.ratio].reshape(self.coarse_prob.init)
+            G.impl.values = F.impl.values[::self.ratio, ::self.ratio]
+            G.expl.values = F.expl.values[::self.ratio, ::self.ratio]
         else:
             raise TransferError('Unknown data type, got %s' % type(F))
         return G
@@ -74,26 +81,29 @@ class mesh_to_mesh_fft(space_transfer):
         """
         if isinstance(G, mesh):
             F = mesh(self.fine_prob.init)
-            tmpG = self.fft_object_coarse(G.values)
+            tmpG = self.fft_object_coarse(G.values) / (self.coarse_prob.init[0] * self.coarse_prob.init[1])
             tmpF = np.zeros(self.fine_prob.init, dtype=np.complex128)
-            halfG = int(self.coarse_prob.init / 2)
-            tmpF[0: halfG] = tmpG[0: halfG]
-            tmpF[self.fine_prob.init - halfG:] = tmpG[halfG:]
-            F.values = np.real(self.ifft_object_fine(tmpF))
-        elif isinstance(G, rhs_imex_mesh):
+            halfG = int(self.coarse_prob.init[0] / 2)
+            tmpF[0:halfG, 0:halfG] = tmpG[0:halfG, 0:halfG]
+            tmpF[self.fine_prob.init[0] - halfG:, 0:halfG] = tmpG[halfG:, 0:halfG]
+            tmpF[0:halfG, self.fine_prob.init[0] - halfG:] = tmpG[0:halfG, halfG:]
+            tmpF[self.fine_prob.init[0] - halfG:, self.fine_prob.init[0] - halfG:] = tmpG[halfG:, halfG:]
+            F.values[:] = np.real(self.ifft_object_fine(tmpF, normalise_idft=False))
+        elif isinstance(G, rhs_imex_mesh): # TODO: cleanup
+            raise NotImplementedError()
             F = rhs_imex_mesh(G)
-            tmpG_impl = self.fft_object_coarse(G.impl.values)
+            tmpG_impl = fft(G.impl.values)
             tmpF_impl = np.zeros(self.fine_prob.init, dtype=np.complex128)
             halfG = int(self.coarse_prob.init / 2)
             tmpF_impl[0: halfG] = tmpG_impl[0: halfG]
             tmpF_impl[self.fine_prob.init - halfG:] = tmpG_impl[halfG:]
-            tmpG_expl = self.fft_object_coarse(G.expl.values)
+            tmpG_expl = fft(G.expl.values)
             tmpF_expl = np.zeros(self.fine_prob.init, dtype=np.complex128)
             halfG = int(self.coarse_prob.init / 2)
             tmpF_expl[0: halfG] = tmpG_expl[0: halfG]
             tmpF_expl[self.fine_prob.init - halfG:] = tmpG_expl[halfG:]
-            F.impl.values = np.real(self.ifft_object_fine(tmpF_impl))
-            F.expl.values = np.real(self.ifft_object_fine(tmpF_expl))
+            F.impl.values = np.real(ifft(tmpF_impl))
+            F.expl.values = np.real(ifft(tmpF_expl))
         else:
             raise TransferError('Unknown data type, got %s' % type(G))
         return F
