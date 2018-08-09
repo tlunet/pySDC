@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jube>
-  <benchmark name="pySDC AC FFT scaling test" outpath="bench_run_PFASST">
+  <benchmark name="pySDC AC FFT PFASST" outpath="bench_run_FFT_PFASST">
     <comment>Scaling test with pySDC</comment>
 
     <parameterset name="param_set_nsweeps">
@@ -43,14 +43,6 @@
     </step>
 
     <!-- Analyse -->
-    <analyser name="analyse_no_reduce" reduce="false">
-      <use>pattern</use> <!-- use existing patternset -->
-      <analyse step="sub_step">
-        <file>run.out</file> <!-- file which should be scanned -->
-      </analyse>
-    </analyser>
-
-        <!-- Analyse -->
     <analyser name="analyse_reduce" reduce="true">
       <use>pattern</use> <!-- use existing patternset -->
       <analyse step="sub_step">
@@ -60,7 +52,6 @@
 
     <!-- Create result table -->
     <result>
-      <use>analyse_no_reduce</use> <!-- use existing analyser -->
       <use>analyse_reduce</use> <!-- use existing analyser -->
       <table name="result" style="pretty" sort="ntasks">
         <column>nnodes</column>
