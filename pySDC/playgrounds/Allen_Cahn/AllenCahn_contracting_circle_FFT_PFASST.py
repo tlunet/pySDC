@@ -85,6 +85,33 @@ def run_variant(nsweeps):
 
     """
 
+    # set MPI communicator
+    comm = MPI.COMM_WORLD
+
+    world_rank = comm.Get_rank()
+    world_size = comm.Get_size()
+
+    # split world communicator to create space-communicators
+    if len(sys.argv) >= 3:
+        color = int(world_rank / int(sys.argv[2]))
+    else:
+        color = int(world_rank / 1)
+    space_comm = comm.Split(color=color)
+    space_size = space_comm.Get_size()
+    space_rank = space_comm.Get_rank()
+
+    # split world communicator to create time-communicators
+    if len(sys.argv) >= 3:
+        color = int(world_rank % int(sys.argv[2]))
+    else:
+        color = int(world_rank / world_size)
+    time_comm = comm.Split(color=color)
+    time_size = time_comm.Get_size()
+    time_rank = time_comm.Get_rank()
+
+    print("IDs (world, space, time):  %i / %i -- %i / %i -- %i / %i" % (world_rank, world_size, space_rank, space_size,
+                                                                        time_rank, time_size))
+
     # load (incomplete) default parameters
     description, controller_params = setup_parameters(nsweeps=nsweeps)
 
@@ -93,8 +120,7 @@ def run_variant(nsweeps):
     Tend = 0.032
 
     # instantiate controller
-    # controller = allinclusive_multigrid_MPI(controller_params=controller_params, description=description, comm=MPI.COMM_WORLD)
-    controller = allinclusive_classic_MPI(controller_params=controller_params, description=description, comm=MPI.COMM_WORLD)
+    controller = allinclusive_classic_MPI(controller_params=controller_params, description=description, comm=time_comm)
 
     # get initial values on finest level
     P = controller.S.levels[0].prob
@@ -123,15 +149,18 @@ def run_variant(nsweeps):
 
     timing = sort_stats(filter_stats(stats, type='timing_run'), sortby='time')
 
-    print('Time to solution: %6.4f sec.' % timing[0][1])
+    maxtiming = comm.allreduce(sendobj=timing[0][1], op=MPI.MAX)
 
-    fname = 'data/AC_reference_FFT_Tend{:.1e}'.format(Tend) + '.npz'
-    loaded = np.load(fname)
-    uref = loaded['uend']
+    if time_rank == time_size - 1:
+        print('Time to solution: %6.4f sec.' % maxtiming)
 
-    err = np.linalg.norm(uref - uend.values, np.inf)
-    print('Error vs. reference solution: %6.4e' % err)
-    print()
+        fname = 'data/AC_reference_FFT_Tend{:.1e}'.format(Tend) + '.npz'
+        loaded = np.load(fname)
+        uref = loaded['uend']
+
+        err = np.linalg.norm(uref - uend.values, np.inf)
+        print('Error vs. reference solution: %6.4e' % err)
+        print()
 
     return stats
 
@@ -144,10 +173,10 @@ def main(cwd=''):
         cwd (str): current working directory (need this for testing)
     """
 
-    if len(sys.argv) == 2:
+    if len(sys.argv) >= 2:
         nsweeps = int(sys.argv[1])
     else:
-        raise NotImplementedError('Need input of nsweeps (and not more), got % s' % sys.argv)
+        raise NotImplementedError('Need input of nsweeps, got % s' % sys.argv)
 
     # Loop over variants, exact and inexact solves
     _ = run_variant(nsweeps=nsweeps)

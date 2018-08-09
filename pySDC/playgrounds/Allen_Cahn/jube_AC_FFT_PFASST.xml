@@ -14,7 +14,7 @@
     <fileset name="files">
       <copy>run_AC_FFT_PFASST.tmpl</copy>
       <copy>AllenCahn_contracting_circle_FFT_PFASST.py</copy>
-      <link>data/AC_reference_FFT_Tend3.2e-02.npz</link>
+      <link target_dir="data">data/AC_reference_FFT_Tend3.2e-02.npz</link>
     </fileset>
 
     <!-- Substitute -->
@@ -35,7 +35,7 @@
     </patternset>
     
     <!-- Operation -->
-    <step name="sub_step">
+    <step name="sub_step" iterations="5">
       <use>param_set_nsweeps</use> <!-- use existing parameterset -->
       <use>files</use>        <!-- use existing fileset -->
       <use>substitute</use>   <!-- use existing substituteset -->
@@ -43,7 +43,15 @@
     </step>
 
     <!-- Analyse -->
-    <analyser name="analyse">
+    <analyser name="analyse_no_reduce" reduce="false">
+      <use>pattern</use> <!-- use existing patternset -->
+      <analyse step="sub_step">
+        <file>run.out</file> <!-- file which should be scanned -->
+      </analyse>
+    </analyser>
+
+        <!-- Analyse -->
+    <analyser name="analyse_reduce" reduce="true">
       <use>pattern</use> <!-- use existing patternset -->
       <analyse step="sub_step">
         <file>run.out</file> <!-- file which should be scanned -->
@@ -52,14 +60,16 @@
 
     <!-- Create result table -->
     <result>
-      <use>analyse</use> <!-- use existing analyser -->
+      <use>analyse_no_reduce</use> <!-- use existing analyser -->
+      <use>analyse_reduce</use> <!-- use existing analyser -->
       <table name="result" style="pretty" sort="ntasks">
         <column>nnodes</column>
         <column>ntasks</column>
         <column>nsweeps</column>
-        <column>timing_pat</column>
+        <column>timing_pat_min</column>
+        <column>timing_pat_avg</column>
         <column>error_pat</column>
-        <column>niter_pat</column>
+        <column>niter_pat_max</column>
       </table>
     </result>
 
