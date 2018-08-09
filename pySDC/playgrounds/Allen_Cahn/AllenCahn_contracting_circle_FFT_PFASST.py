@@ -1,9 +1,5 @@
-import pySDC.helpers.plot_helper as plt_helper
-import matplotlib.ticker as ticker
+import sys
 from mpi4py import MPI
-
-import dill
-import os
 import numpy as np
 
 from pySDC.implementations.datatype_classes.mesh import mesh, rhs_imex_mesh
@@ -20,7 +16,7 @@ from pySDC.playgrounds.Allen_Cahn.AllenCahn_monitor import monitor
 # http://www.personal.psu.edu/qud2/Res/Pre/dz09sisc.pdf
 
 
-def setup_parameters():
+def setup_parameters(nsweeps=None):
     """
     Helper routine to fill in all relevant parameters
 
@@ -35,7 +31,7 @@ def setup_parameters():
     level_params = dict()
     level_params['restol'] = 1E-07
     level_params['dt'] = 1E-03 / 2
-    level_params['nsweeps'] = None
+    level_params['nsweeps'] = [nsweeps, 1]
 
     # initialize sweeper parameters
     sweeper_params = dict()
@@ -49,7 +45,7 @@ def setup_parameters():
     problem_params = dict()
     problem_params['nu'] = 2
     problem_params['L'] = 1.0
-    problem_params['nvars'] = None
+    problem_params['nvars'] = [(128, 128), (32, 32)]
     problem_params['eps'] = 0.04
     problem_params['radius'] = 0.25
 
@@ -78,32 +74,18 @@ def setup_parameters():
     return description, controller_params
 
 
-def run_variant(variant=None):
+def run_variant(nsweeps):
     """
     Routine to run particular SDC variant
 
     Args:
-        variant (str): string describing the variant
 
     Returns:
 
     """
 
     # load (incomplete) default parameters
-    description, controller_params = setup_parameters()
-
-    # add stuff based on variant
-    if variant == 'PFASST1':
-        description['level_params']['nsweeps'] = [1, 1]
-        description['problem_params']['nvars'] = [(128, 128), (32, 32)]
-    elif variant == 'PFASST2':
-        description['level_params']['nsweeps'] = [2, 1]
-        description['problem_params']['nvars'] = [(128, 128), (32, 32)]
-    else:
-        raise NotImplemented('Wrong variant specified, got %s' % variant)
-
-    out = 'Working on %s variant...' % variant
-    print(out)
+    description, controller_params = setup_parameters(nsweeps=nsweeps)
 
     # setup parameters "in time"
     t0 = 0.0
@@ -116,14 +98,8 @@ def run_variant(variant=None):
     P = controller.S.levels[0].prob
     uinit = P.u_exact(t0)
 
-    # plt_helper.plt.imshow(uinit.values)
-    # plt_helper.plt.show()
-
     # call main function to get things done...
     uend, stats = controller.run(u0=uinit, t0=t0, Tend=Tend)
-
-    # plt_helper.plt.imshow(uend.values)
-    # plt_helper.plt.show()
 
     # filter statistics by variant (number of iterations)
     filtered_stats = filter_stats(stats, type='niter')
@@ -147,6 +123,14 @@ def run_variant(variant=None):
 
     print('Time to solution: %6.4f sec.' % timing[0][1])
 
+    fname = 'data/AC_reference_FFT_Tend{:.1e}'.format(Tend) + '.npz'
+    loaded = np.load(fname)
+    uref = loaded['uend']
+
+    err = np.linalg.norm(uref - uend.values, np.inf)
+    print('Error vs. reference solution: %6.4e' % err)
+    print()
+
     return stats
 
 
@@ -158,11 +142,13 @@ def main(cwd=''):
         cwd (str): current working directory (need this for testing)
     """
 
-    # Loop over variants, exact and inexact solves
-    results = {}
-    for variant in ['PFASST1', 'PFASST2']:
+    if len(sys.argv) == 2:
+        nsweeps = int(sys.argv[1])
+    else:
+        raise NotImplementedError('Need input of nsweeps (and not more), got % s' % sys.argv)
 
-        results[(variant, 'exact')] = run_variant(variant=variant)
+    # Loop over variants, exact and inexact solves
+    _ = run_variant(nsweeps=nsweeps)
 
 
 if __name__ == "__main__":
