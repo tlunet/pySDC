@@ -33,8 +33,8 @@ def setup_parameters():
 
     # initialize level parameters
     level_params = dict()
-    level_params['restol'] = 1E-08
-    level_params['dt'] = 1E-03
+    level_params['restol'] = 1E-07
+    level_params['dt'] = 1E-03 / 2
     level_params['nsweeps'] = None
 
     # initialize sweeper parameters
@@ -96,12 +96,15 @@ def run_variant(variant=None):
     if variant == 'SDC':
         description['level_params']['nsweeps'] = 1
         description['problem_params']['nvars'] = [(128, 128)]
+        # description['problem_params']['nvars'] = [(32, 32)]
     elif variant == 'MLSDC1':
         description['level_params']['nsweeps'] = [1, 1]
-        description['problem_params']['nvars'] = [(128, 128), (64, 64)]
+        description['problem_params']['nvars'] = [(128, 128), (32, 32)]
+        # description['problem_params']['nvars'] = [(32, 32), (16, 16)]
     elif variant == 'MLSDC2':
         description['level_params']['nsweeps'] = [2, 1]
-        description['problem_params']['nvars'] = [(128, 128), (64, 64)]
+        description['problem_params']['nvars'] = [(128, 128), (32, 32)]
+        # description['problem_params']['nvars'] = [(32, 32), (16, 16)]
     else:
         raise NotImplemented('Wrong variant specified, got %s' % variant)
 
@@ -113,7 +116,7 @@ def run_variant(variant=None):
     Tend = 0.032
 
     # instantiate controller
-    controller = allinclusive_multigrid_nonMPI(num_procs=1, controller_params=controller_params,
+    controller = allinclusive_multigrid_nonMPI(num_procs=32, controller_params=controller_params,
                                                description=description)
 
     # get initial values on finest level
@@ -162,132 +165,6 @@ def run_variant(variant=None):
     return stats
 
 
-def show_results(fname, cwd=''):
-    """
-    Plotting routine
-
-    Args:
-        fname (str): file name to read in and name plots
-        cwd (str): current working directory
-    """
-
-    file = open(cwd + fname + '.pkl', 'rb')
-    results = dill.load(file)
-    file.close()
-
-    # plt_helper.mpl.style.use('classic')
-    plt_helper.setup_mpl()
-
-    # set up plot for timings
-    fig, ax1 = plt_helper.newfig(textwidth=238.96, scale=1.5, ratio=0.4)
-
-    timings = {}
-    niters = {}
-    for key, item in results.items():
-        timings[key] = sort_stats(filter_stats(item, type='timing_run'), sortby='time')[0][1]
-        iter_counts = sort_stats(filter_stats(item, type='niter'), sortby='time')
-        niters[key] = np.mean(np.array([item[1] for item in iter_counts]))
-
-    xcoords = [i for i in range(len(timings))]
-    sorted_timings = sorted([(key, timings[key]) for key in timings], reverse=True, key=lambda tup: tup[1])
-    sorted_niters = [(k, niters[k]) for k in [key[0] for key in sorted_timings]]
-    heights_timings = [item[1] for item in sorted_timings]
-    heights_niters = [item[1] for item in sorted_niters]
-    keys = [(item[0][1] + ' ' + item[0][0]).replace('-', '\n').replace('_v2', ' mod.') for item in sorted_timings]
-
-    ax1.bar(xcoords, heights_timings, align='edge', width=-0.3, label='timings (left axis)')
-    ax1.set_ylabel('time (sec)')
-
-    ax2 = ax1.twinx()
-    ax2.bar(xcoords, heights_niters, color='r', align='edge', width=0.3, label='iterations (right axis)')
-    ax2.set_ylabel('mean number of iterations')
-
-    ax1.set_xticks(xcoords)
-    ax1.set_xticklabels(keys, rotation=90, ha='center')
-
-    # ask matplotlib for the plotted objects and their labels
-    lines, labels = ax1.get_legend_handles_labels()
-    lines2, labels2 = ax2.get_legend_handles_labels()
-    ax2.legend(lines + lines2, labels + labels2, loc=0)
-
-    # save plot, beautify
-    f = fname + '_timings'
-    plt_helper.savefig(f)
-
-    assert os.path.isfile(f + '.pdf'), 'ERROR: plotting did not create PDF file'
-    assert os.path.isfile(f + '.pgf'), 'ERROR: plotting did not create PGF file'
-    assert os.path.isfile(f + '.png'), 'ERROR: plotting did not create PNG file'
-
-    # set up plot for radii
-    fig, ax = plt_helper.newfig(textwidth=238.96, scale=1.0)
-
-    exact_radii = []
-    for key, item in results.items():
-        computed_radii = sort_stats(filter_stats(item, type='computed_radius'), sortby='time')
-
-        xcoords = [item0[0] for item0 in computed_radii]
-        radii = [item0[1] for item0 in computed_radii]
-        if key[0] + ' ' + key[1] == 'semi-implicit exact':
-            ax.plot(xcoords, radii, label=(key[0] + ' ' + key[1]).replace('_v2', ' mod.'))
-
-        exact_radii = sort_stats(filter_stats(item, type='exact_radius'), sortby='time')
-
-        diff = np.array([abs(item0[1] - item1[1]) for item0, item1 in zip(exact_radii, computed_radii)])
-        max_pos = int(np.argmax(diff))
-        # assert max(diff) < 0.07, 'ERROR: computed radius is too far away from exact radius, got %s' % max(diff)
-        # assert 0.028 < computed_radii[max_pos][0] < 0.03, \
-        #     'ERROR: largest difference is at wrong time, got %s' % computed_radii[max_pos][0]
-
-    xcoords = [item[0] for item in exact_radii]
-    radii = [item[1] for item in exact_radii]
-    ax.plot(xcoords, radii, color='k', linestyle='--', linewidth=1, label='exact')
-
-    ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%1.2f'))
-    ax.set_ylabel('radius')
-    ax.set_xlabel('time')
-    ax.grid()
-    ax.legend(loc=3)
-
-    # save plot, beautify
-    f = fname + '_radii'
-    plt_helper.savefig(f)
-
-    assert os.path.isfile(f + '.pdf'), 'ERROR: plotting did not create PDF file'
-    assert os.path.isfile(f + '.pgf'), 'ERROR: plotting did not create PGF file'
-    assert os.path.isfile(f + '.png'), 'ERROR: plotting did not create PNG file'
-
-    # set up plot for interface width
-    fig, ax = plt_helper.newfig(textwidth=238.96, scale=1.0)
-
-    interface_width = []
-    for key, item in results.items():
-        interface_width = sort_stats(filter_stats(item, type='interface_width'), sortby='time')
-        xcoords = [item[0] for item in interface_width]
-        width = [item[1] for item in interface_width]
-        if key[0] + ' ' + key[1] == 'fully-implicit exact':
-            ax.plot(xcoords, width, label=key[0] + ' ' + key[1])
-
-    xcoords = [item[0] for item in interface_width]
-    init_width = [interface_width[0][1]] * len(xcoords)
-    ax.plot(xcoords, init_width, color='k', linestyle='--', linewidth=1, label='exact')
-
-    ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('%1.2f'))
-    ax.set_ylabel(r'interface width ($\epsilon$)')
-    ax.set_xlabel('time')
-    ax.grid()
-    ax.legend(loc=3)
-
-    # save plot, beautify
-    f = fname + '_interface'
-    plt_helper.savefig(f)
-
-    assert os.path.isfile(f + '.pdf'), 'ERROR: plotting did not create PDF file'
-    assert os.path.isfile(f + '.pgf'), 'ERROR: plotting did not create PGF file'
-    assert os.path.isfile(f + '.png'), 'ERROR: plotting did not create PNG file'
-
-    return None
-
-
 def main(cwd=''):
     """
     Main driver
@@ -298,19 +175,9 @@ def main(cwd=''):
 
     # Loop over variants, exact and inexact solves
     results = {}
-    for variant in ['SDC', 'MLSDC1', 'MLSDC2']:
+    for variant in ['MLSDC1', 'MLSDC2']:
 
         results[(variant, 'exact')] = run_variant(variant=variant)
-
-    # dump result
-    fname = 'data/results_MLSDC_variants_AllenCahn_1E-03'
-    file = open(cwd + fname + '.pkl', 'wb')
-    dill.dump(results, file)
-    file.close()
-    assert os.path.isfile(cwd + fname + '.pkl'), 'ERROR: dill did not create file'
-
-    # visualize
-    # show_results(fname, cwd=cwd)
 
 
 if __name__ == "__main__":

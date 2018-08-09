@@ -35,9 +35,9 @@ def setup_parameters():
 
     # initialize level parameters
     level_params = dict()
-    level_params['restol'] = 1E-08
-    level_params['dt'] = 1E-03
-    level_params['nsweeps'] = [1]
+    level_params['restol'] = 1E-07
+    level_params['dt'] = 1E-03 / 2
+    level_params['nsweeps'] = 1
 
     # initialize sweeper parameters
     sweeper_params = dict()
@@ -52,11 +52,11 @@ def setup_parameters():
     # This comes as read-in for the problem class
     problem_params = dict()
     problem_params['nu'] = 2
-    problem_params['nvars'] = [(64, 64)]
-    problem_params['eps'] = [0.04]
+    problem_params['nvars'] = (128, 128)
+    problem_params['eps'] = 0.04
     problem_params['newton_maxiter'] = 100
-    problem_params['newton_tol'] = 1E-09
-    problem_params['lin_tol'] = 1E-10
+    problem_params['newton_tol'] = 1E-08
+    problem_params['lin_tol'] = 1E-09
     problem_params['lin_maxiter'] = 100
     problem_params['radius'] = 0.25
 
@@ -180,11 +180,11 @@ def run_SDC_variant(variant=None, inexact=False):
 
     print('Time to solution: %6.4f sec.' % timing[0][1])
 
-    fname = 'data/AC_reference_FFT_Tend{:.1e}'.format(Tend) + '.npz'
+    fname = 'data/AC_reference_Tend{:.1e}'.format(Tend) + '.npz'
     loaded = np.load(fname)
     uref = loaded['uend']
 
-    err = np.linalg.norm(uref[::2, ::2] - uend.values, np.inf)
+    err = np.linalg.norm(uref - uend.values, np.inf)
     print('Error vs. reference solution: %6.4e' % err)
     print()
 
@@ -331,7 +331,7 @@ def main(cwd=''):
 
     # Loop over variants, exact and inexact solves
     results = {}
-    for variant in ['semi-implicit']: #'['multi-implicit', 'semi-implicit', 'fully-implicit', 'semi-implicit_v2', 'multi-implicit_v2']:
+    for variant in ['multi-implicit', 'semi-implicit', 'fully-implicit', 'semi-implicit_v2', 'multi-implicit_v2']:
 
         results[(variant, 'exact')] = run_SDC_variant(variant=variant, inexact=False)
         results[(variant, 'inexact')] = run_SDC_variant(variant=variant, inexact=True)

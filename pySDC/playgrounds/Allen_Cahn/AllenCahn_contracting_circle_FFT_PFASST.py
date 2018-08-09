@@ -33,8 +33,8 @@ def setup_parameters():
 
     # initialize level parameters
     level_params = dict()
-    level_params['restol'] = 1E-08
-    level_params['dt'] = 1E-03
+    level_params['restol'] = 1E-07
+    level_params['dt'] = 1E-03 / 2
     level_params['nsweeps'] = None
 
     # initialize sweeper parameters
@@ -147,14 +147,6 @@ def run_variant(variant=None):
 
     print('Time to solution: %6.4f sec.' % timing[0][1])
 
-    fname = 'data/AC_reference_FFT_Tend{:.1e}'.format(Tend) + '.npz'
-    loaded = np.load(fname)
-    uref = loaded['uend']
-
-    err = np.linalg.norm(uref - uend.values, np.inf)
-    print('Error vs. reference solution: %6.4e' % err)
-    print()
-
     return stats
 
 
@@ -171,16 +163,6 @@ def main(cwd=''):
     for variant in ['PFASST1', 'PFASST2']:
 
         results[(variant, 'exact')] = run_variant(variant=variant)
-
-    # dump result
-    fname = 'data/results_PFASST_variants_AllenCahn_1E-03'
-    file = open(cwd + fname + '.pkl', 'wb')
-    dill.dump(results, file)
-    file.close()
-    assert os.path.isfile(cwd + fname + '.pkl'), 'ERROR: dill did not create file'
-
-    # visualize
-    # show_results(fname, cwd=cwd)
 
 
 if __name__ == "__main__":

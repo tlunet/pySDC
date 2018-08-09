@@ -17,8 +17,8 @@ def setup_problem():
     problem_params['nvars'] = (128, 128)
     problem_params['eps'] = 0.04
     problem_params['newton_maxiter'] = 100
-    problem_params['newton_tol'] = 1E-09
-    problem_params['lin_tol'] = 1E-10
+    problem_params['newton_tol'] = 1E-07
+    problem_params['lin_tol'] = 1E-08
     problem_params['lin_maxiter'] = 100
     problem_params['radius'] = 0.25
 
@@ -214,11 +214,11 @@ def main_error(cwd=''):
     Tend = 0.032
 
     errors = {}
-    err, _, _ = run_implicit_Euler(t0=t0, dt=0.001/512, Tend=Tend)
-    errors['implicit-Euler'] = err
-    err, _, _ = run_imex_Euler(t0=t0, dt=0.001/512, Tend=Tend)
-    errors['imex-Euler'] = err
-    err, _, _ = run_CrankNicholson(t0=t0, dt=0.001/16, Tend=Tend)
+    # err, _, _ = run_implicit_Euler(t0=t0, dt=0.001/512, Tend=Tend)
+    # errors['implicit-Euler'] = err
+    # err, _, _ = run_imex_Euler(t0=t0, dt=0.001/512, Tend=Tend)
+    # errors['imex-Euler'] = err
+    err, _, _ = run_CrankNicholson(t0=t0, dt=0.001/64, Tend=Tend)
     errors['CrankNicholson'] = err
 
 
