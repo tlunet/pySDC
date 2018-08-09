@@ -4,12 +4,9 @@
     <comment>Scaling test with pySDC</comment>
 
     <parameterset name="param_set_nsweeps">
-      <!--<parameter name="i">0,1,2,3</parameter>-->
-      <!--<parameter name="nnodes" mode="python" type="int">[1,1,1,1, 1, 2, 4][$i]</parameter>-->
-      <!--<parameter name="ntasks" mode="python" type="int">[1,2,4,8,16,16,16][$i]</parameter>-->
-      <parameter name="i">0</parameter>
-      <parameter name="nnodes" mode="python" type="int">[1][$i]</parameter>
-      <parameter name="ntasks" mode="python" type="int">[2][$i]</parameter>
+      <parameter name="i">0,1,2,3,4</parameter>
+      <parameter name="nnodes" mode="python" type="int">[1,1,1,1, 1][$i]</parameter>
+      <parameter name="ntasks" mode="python" type="int">[1,2,4,8,16][$i]</parameter>
       <parameter name="nsweeps" type="int">1</parameter>
     </parameterset>
 
