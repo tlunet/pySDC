@@ -5,6 +5,7 @@ http://www.fz-juelich.de/ias/jsc/EN/Expertise/Supercomputers/JURECA/JURECA_node.
 > module load SciPy-Stack
 > module load mpi4py
 > module load FFTW
+> module load JUBE
 
 > pip install --user dill pyfftw
 

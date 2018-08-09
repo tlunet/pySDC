@@ -123,7 +123,7 @@ def run_variant(nsweeps):
 
     print('Time to solution: %6.4f sec.' % timing[0][1])
 
-    fname = 'data/AC_reference_FFT_Tend{:.1e}'.format(Tend) + '.npz'
+    fname = 'AC_reference_FFT_Tend{:.1e}'.format(Tend) + '.npz'
     loaded = np.load(fname)
     uref = loaded['uend']
 
