@@ -1,8 +1,8 @@
 #!/bin/bash -x
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --output=run.out
-#SBATCH --error=run.err
+#SBATCH --output=run_CN.out
+#SBATCH --error=run_CN.err
 #SBATCH --time=00:10:00
 #SBATCH --partition=batch
 
