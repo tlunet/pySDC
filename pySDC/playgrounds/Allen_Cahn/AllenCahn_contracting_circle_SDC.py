@@ -188,10 +188,6 @@ def run_SDC_variant(variant=None, inexact=False):
     print('Error vs. reference solution: %6.4e' % err)
     print()
 
-    # plt.plot(uend.values[64, 60:69])
-    # plt.show()
-    exit()
-
     return stats
 
 
@@ -344,7 +340,7 @@ def main(cwd=''):
     assert os.path.isfile(cwd + fname + '.pkl'), 'ERROR: dill did not create file'
 
     # visualize
-    show_results(fname, cwd=cwd)
+    # show_results(fname, cwd=cwd)
 
 
 if __name__ == "__main__":
