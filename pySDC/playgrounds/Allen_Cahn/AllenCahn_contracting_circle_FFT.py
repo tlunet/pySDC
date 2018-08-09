@@ -1,9 +1,4 @@
-import pySDC.helpers.plot_helper as plt_helper
-import matplotlib.ticker as ticker
-import matplotlib.pyplot as plt
-
-import dill
-import os
+import sys
 import numpy as np
 
 from pySDC.implementations.datatype_classes.mesh import mesh, rhs_imex_mesh
@@ -78,12 +73,11 @@ def setup_parameters():
     return description, controller_params
 
 
-def run_variant(variant=None):
+def run_variant(nlevels=None):
     """
     Routine to run particular SDC variant
 
     Args:
-        variant (str): string describing the variant
 
     Returns:
 
@@ -93,22 +87,18 @@ def run_variant(variant=None):
     description, controller_params = setup_parameters()
 
     # add stuff based on variant
-    if variant == 'SDC':
+    if nlevels == 1:
         description['level_params']['nsweeps'] = 1
         description['problem_params']['nvars'] = [(128, 128)]
         # description['problem_params']['nvars'] = [(32, 32)]
-    elif variant == 'MLSDC1':
+    elif nlevels == 2:
         description['level_params']['nsweeps'] = [1, 1]
         description['problem_params']['nvars'] = [(128, 128), (32, 32)]
         # description['problem_params']['nvars'] = [(32, 32), (16, 16)]
-    elif variant == 'MLSDC2':
-        description['level_params']['nsweeps'] = [2, 1]
-        description['problem_params']['nvars'] = [(128, 128), (32, 32)]
-        # description['problem_params']['nvars'] = [(32, 32), (16, 16)]
     else:
-        raise NotImplemented('Wrong variant specified, got %s' % variant)
+        raise NotImplemented('Wrong variant specified, got %s' % nlevels)
 
-    out = 'Working on %s variant...' % variant
+    out = 'Working on %s levels...' % nlevels
     print(out)
 
     # setup parameters "in time"
@@ -116,7 +106,7 @@ def run_variant(variant=None):
     Tend = 0.032
 
     # instantiate controller
-    controller = allinclusive_multigrid_nonMPI(num_procs=32, controller_params=controller_params,
+    controller = allinclusive_multigrid_nonMPI(num_procs=1, controller_params=controller_params,
                                                description=description)
 
     # get initial values on finest level
@@ -173,11 +163,12 @@ def main(cwd=''):
         cwd (str): current working directory (need this for testing)
     """
 
-    # Loop over variants, exact and inexact solves
-    results = {}
-    for variant in ['MLSDC1', 'MLSDC2']:
+    if len(sys.argv) == 2:
+        nlevels = int(sys.argv[1])
+    else:
+        raise NotImplementedError('Need input of nsweeps, got % s' % sys.argv)
 
-        results[(variant, 'exact')] = run_variant(variant=variant)
+    _ = run_variant(nlevels=nlevels)
 
 
 if __name__ == "__main__":

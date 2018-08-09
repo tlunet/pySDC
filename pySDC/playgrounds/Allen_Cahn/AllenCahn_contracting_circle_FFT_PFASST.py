@@ -151,16 +151,17 @@ def run_variant(nsweeps):
 
     maxtiming = comm.allreduce(sendobj=timing[0][1], op=MPI.MAX)
 
-    if time_rank == time_size - 1:
+    if time_rank == time_size - 1 and space_rank == 0:
         print('Time to solution: %6.4f sec.' % maxtiming)
 
-        fname = 'data/AC_reference_FFT_Tend{:.1e}'.format(Tend) + '.npz'
-        loaded = np.load(fname)
-        uref = loaded['uend']
-
-        err = np.linalg.norm(uref - uend.values, np.inf)
-        print('Error vs. reference solution: %6.4e' % err)
-        print()
+    # if time_rank == time_size - 1:
+    #     fname = 'data/AC_reference_FFT_Tend{:.1e}'.format(Tend) + '.npz'
+    #     loaded = np.load(fname)
+    #     uref = loaded['uend']
+    #
+    #     err = np.linalg.norm(uref - uend.values, np.inf)
+    #     print('Error vs. reference solution: %6.4e' % err)
+    #     print()
 
     return stats
 
