@@ -6,6 +6,7 @@ from pySDC.implementations.datatype_classes.mesh import mesh, rhs_imex_mesh
 from pySDC.implementations.sweeper_classes.imex_1st_order import imex_1st_order
 from pySDC.implementations.collocation_classes.gauss_radau_right import CollGaussRadau_Right
 from pySDC.implementations.controller_classes.allinclusive_multigrid_MPI import allinclusive_multigrid_MPI
+from pySDC.implementations.controller_classes.allinclusive_classic_MPI import allinclusive_classic_MPI
 from pySDC.implementations.problem_classes.AllenCahn_2D_FFT import allencahn2d_imex
 from pySDC.implementations.transfer_classes.TransferMesh_FFT2D import mesh_to_mesh_fft2d
 
@@ -92,7 +93,8 @@ def run_variant(nsweeps):
     Tend = 0.032
 
     # instantiate controller
-    controller = allinclusive_multigrid_MPI(controller_params=controller_params, description=description, comm=MPI.COMM_WORLD)
+    # controller = allinclusive_multigrid_MPI(controller_params=controller_params, description=description, comm=MPI.COMM_WORLD)
+    controller = allinclusive_classic_MPI(controller_params=controller_params, description=description, comm=MPI.COMM_WORLD)
 
     # get initial values on finest level
     P = controller.S.levels[0].prob
@@ -123,7 +125,7 @@ def run_variant(nsweeps):
 
     print('Time to solution: %6.4f sec.' % timing[0][1])
 
-    fname = 'AC_reference_FFT_Tend{:.1e}'.format(Tend) + '.npz'
+    fname = 'data/AC_reference_FFT_Tend{:.1e}'.format(Tend) + '.npz'
     loaded = np.load(fname)
     uref = loaded['uend']
 

@@ -17,7 +17,7 @@
     <fileset name="files">
       <copy>run_AC_FFT_PFASST.tmpl</copy>
       <copy>AllenCahn_contracting_circle_FFT_PFASST.py</copy>
-      <copy>data/AC_reference_FFT_Tend3.2e-02.npz</copy>
+      <link rel_path_ref="internal">data/AC_reference_FFT_Tend3.2e-02.npz</link>
     </fileset>
 
     <!-- Substitute -->
