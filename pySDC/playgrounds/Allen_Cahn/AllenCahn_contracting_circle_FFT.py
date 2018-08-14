@@ -10,7 +10,7 @@ from pySDC.implementations.transfer_classes.TransferMesh_FFT2D import mesh_to_me
 
 from pySDC.helpers.stats_helper import filter_stats, sort_stats
 from pySDC.playgrounds.Allen_Cahn.AllenCahn_monitor import monitor
-
+from pySDC.playgrounds.Allen_Cahn.AllenCahn_output import output
 
 # http://www.personal.psu.edu/qud2/Res/Pre/dz09sisc.pdf
 
@@ -29,7 +29,7 @@ def setup_parameters():
     # initialize level parameters
     level_params = dict()
     level_params['restol'] = 1E-07
-    level_params['dt'] = 1E-03 / 2
+    level_params['dt'] = 1E-03
     level_params['nsweeps'] = None
 
     # initialize sweeper parameters
@@ -43,10 +43,11 @@ def setup_parameters():
     # This comes as read-in for the problem class
     problem_params = dict()
     problem_params['nu'] = 2
-    problem_params['L'] = 1.0
+    problem_params['L'] = 4.0
     problem_params['nvars'] = None
     problem_params['eps'] = 0.04
     problem_params['radius'] = 0.25
+    problem_params['init_type'] = 'checkerboard'
 
     # initialize step parameters
     step_params = dict()
@@ -55,7 +56,7 @@ def setup_parameters():
     # initialize controller parameters
     controller_params = dict()
     controller_params['logger_level'] = 30
-    controller_params['hook_class'] = monitor
+    controller_params['hook_class'] = output
     controller_params['predict'] = False
 
     # fill description dictionary for easy step instantiation
@@ -89,7 +90,7 @@ def run_variant(nlevels=None):
     # add stuff based on variant
     if nlevels == 1:
         description['level_params']['nsweeps'] = 1
-        description['problem_params']['nvars'] = [(128, 128)]
+        description['problem_params']['nvars'] = [(256, 256)]
         # description['problem_params']['nvars'] = [(32, 32)]
     elif nlevels == 2:
         description['level_params']['nsweeps'] = [1, 1]
@@ -103,7 +104,7 @@ def run_variant(nlevels=None):
 
     # setup parameters "in time"
     t0 = 0.0
-    Tend = 0.032
+    Tend = 1000.0
 
     # instantiate controller
     controller = allinclusive_multigrid_nonMPI(num_procs=1, controller_params=controller_params,
@@ -160,7 +161,8 @@ def main(cwd=''):
     if len(sys.argv) == 2:
         nlevels = int(sys.argv[1])
     else:
-        raise NotImplementedError('Need input of nsweeps, got % s' % sys.argv)
+        nlevels = 1
+        # raise NotImplementedError('Need input of nsweeps, got % s' % sys.argv)
 
     _ = run_variant(nlevels=nlevels)
 

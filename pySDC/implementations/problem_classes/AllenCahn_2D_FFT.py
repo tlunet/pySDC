@@ -30,6 +30,8 @@ class allencahn2d_imex(ptype):
 
         if 'L' not in problem_params:
             problem_params['L'] = 1.0
+        if 'init_type' not in problem_params:
+            problem_params['init_type'] = 'circle'
 
         # these parameters will be used later, so assert their existence
         essential_keys = ['nvars', 'nu', 'eps', 'L', 'radius']
@@ -131,9 +133,17 @@ class allencahn2d_imex(ptype):
 
         assert t == 0, 'ERROR: u_exact only valid for t=0'
         me = self.dtype_u(self.init, val=0.0)
-        for i in range(self.params.nvars[0]):
-            for j in range(self.params.nvars[1]):
-                r2 = self.xvalues[i] ** 2 + self.xvalues[j] ** 2
-                me.values[i, j] = np.tanh((self.params.radius - np.sqrt(r2)) / (np.sqrt(2) * self.params.eps))
+        if self.params.init_type == 'circle':
+            for i in range(self.params.nvars[0]):
+                for j in range(self.params.nvars[1]):
+                    r2 = self.xvalues[i] ** 2 + self.xvalues[j] ** 2
+                    me.values[i, j] = np.tanh((self.params.radius - np.sqrt(r2)) / (np.sqrt(2) * self.params.eps))
+        elif self.params.init_type == 'checkerboard':
+            xv, yv = np.meshgrid(self.xvalues, self.xvalues)
+            me.values[:, :] = np.sin(2.0 * np.pi * xv) * np.sin(2.0 * np.pi * yv)
+            # print(me.values.shape)
+            # exit()
+        else:
+            raise NotImplementedError('type of initial value not implemented, got %s' % self.params.init_type)
 
         return me
