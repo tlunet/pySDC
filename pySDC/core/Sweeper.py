@@ -178,6 +178,7 @@ class sweeper(object):
 
         # find maximal residual over the nodes
         L.status.residual = max(res_norm)
+        # L.status.residual = res_norm[-1]
 
         # indicate that the residual has seen the new values
         L.status.updated = False

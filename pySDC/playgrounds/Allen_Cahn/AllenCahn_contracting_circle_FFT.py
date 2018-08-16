@@ -43,11 +43,11 @@ def setup_parameters():
     # This comes as read-in for the problem class
     problem_params = dict()
     problem_params['nu'] = 2
-    problem_params['L'] = 4.0
+    problem_params['L'] = 1.0
     problem_params['nvars'] = None
     problem_params['eps'] = 0.04
     problem_params['radius'] = 0.25
-    problem_params['init_type'] = 'random'
+    problem_params['init_type'] = 'circle'
 
     # initialize step parameters
     step_params = dict()
@@ -90,7 +90,7 @@ def run_variant(nlevels=None):
     # add stuff based on variant
     if nlevels == 1:
         description['level_params']['nsweeps'] = 1
-        description['problem_params']['nvars'] = [(256, 256)]
+        description['problem_params']['nvars'] = [(128, 128)]
         # description['problem_params']['nvars'] = [(32, 32)]
     elif nlevels == 2:
         description['level_params']['nsweeps'] = [1, 1]
@@ -104,7 +104,7 @@ def run_variant(nlevels=None):
 
     # setup parameters "in time"
     t0 = 0.0
-    Tend = 1000.0
+    Tend = 0.032
 
     # instantiate controller
     controller = allinclusive_multigrid_nonMPI(num_procs=1, controller_params=controller_params,

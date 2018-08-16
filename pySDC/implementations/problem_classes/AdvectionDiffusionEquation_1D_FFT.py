@@ -1,6 +1,6 @@
 from __future__ import division
 import numpy as np
-from scipy.fftpack import fft, ifft
+import pyfftw
 
 from pySDC.core.Problem import ptype
 from pySDC.core.Errors import ParameterError, ProblemError
@@ -48,13 +48,19 @@ class advectiondiffusion1d_imex(ptype):
         self.xvalues = np.array([i * self.params.L / self.params.nvars - self.params.L / 2.0
                                  for i in range(self.params.nvars)])
 
-        kx = np.zeros(self.init)
-        for i in range(0, int(self.init / 2) + 1):
+        kx = np.zeros(self.init // 2 + 1)
+        for i in range(0, len(kx)):
             kx[i] = 2 * np.pi / self.params.L * i
-        for i in range(int(self.init / 2) + 1, self.init):
-            kx[i] = 2 * np.pi / self.params.L * (-self.init + i)
+
         self.ddx = kx * 1j
         self.lap = -kx ** 2
+
+        rfft_in = pyfftw.empty_aligned(self.init, dtype='float64')
+        fft_out = pyfftw.empty_aligned(self.init // 2 + 1, dtype='complex128')
+        ifft_in = pyfftw.empty_aligned(self.init // 2 + 1, dtype='complex128')
+        irfft_out = pyfftw.empty_aligned(self.init, dtype='float64')
+        self.rfft_object = pyfftw.FFTW(rfft_in, fft_out, direction='FFTW_FORWARD')
+        self.irfft_object = pyfftw.FFTW(ifft_in, irfft_out, direction='FFTW_BACKWARD')
 
     def eval_f(self, u, t):
         """
@@ -69,14 +75,12 @@ class advectiondiffusion1d_imex(ptype):
         """
 
         f = self.dtype_f(self.init)
-        tmp_impl = fft(u.values)
-        tmp_expl = tmp_impl.copy()
+        tmp_u = self.rfft_object(u.values)
+        tmp_impl = self.params.nu * self.lap * tmp_u
+        tmp_expl = -self.params.c * self.ddx * tmp_u
+        f.impl.values[:] = self.irfft_object(tmp_impl)
+        f.expl.values[:] = self.irfft_object(tmp_expl)
 
-        tmp_impl *= self.params.nu * self.lap
-        tmp_expl *= -self.params.c * self.ddx
-
-        f.impl.values = np.real(ifft(tmp_impl))
-        f.expl.values = np.real(ifft(tmp_expl))
         return f
 
     def solve_system(self, rhs, factor, u0, t):
@@ -94,10 +98,9 @@ class advectiondiffusion1d_imex(ptype):
         """
 
         me = self.dtype_u(self.init)
+        tmp = self.rfft_object(rhs.values) / (1.0 - self.params.nu * factor * self.lap)
+        me.values[:] = self.irfft_object(tmp)
 
-        tmp = fft(rhs.values)
-        tmp /= (1.0 - self.params.nu * factor * self.lap)
-        me.values = np.real(ifft(tmp))
         return me
 
     def u_exact(self, t):
@@ -111,11 +114,19 @@ class advectiondiffusion1d_imex(ptype):
             dtype_u: exact solution
         """
 
-        me = self.dtype_u(self.init)
-        if self.params.freq >= 0:
+        me = self.dtype_u(self.init, val=0.0)
+        if self.params.freq > 0:
             omega = 2.0 * np.pi * self.params.freq
             me.values = np.sin(omega * (self.xvalues - self.params.c * t)) * np.exp(-t * self.params.nu * omega ** 2)
-        else:
+        elif self.params.freq == 0:
             np.random.seed(1)
             me.values = np.random.rand(self.params.nvars)
+        else:
+            t00 = 0.08
+            if self.params.nu > 0:
+                nbox = int(np.ceil(np.sqrt(4.0 * self.params.nu * (t00 + t) * 37.0 / (self.params.L ** 2))))
+                for k in range(-nbox, nbox + 1):
+                    for i in range(self.init):
+                        x = self.xvalues[i] - self.params.c * t + k * self.params.L
+                        me.values[i] += np.sqrt(t00) / np.sqrt(t00 + t) * np.exp(-x ** 2 / (4.0 * self.params.nu * (t00 + t)))
         return me

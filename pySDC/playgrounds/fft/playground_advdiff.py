@@ -3,12 +3,14 @@ import numpy as np
 from pySDC.implementations.problem_classes.AdvectionDiffusionEquation_1D_FFT import advectiondiffusion1d_imex
 from pySDC.implementations.datatype_classes.mesh import mesh, rhs_imex_mesh
 from pySDC.implementations.collocation_classes.gauss_radau_right import CollGaussRadau_Right
+from pySDC.implementations.collocation_classes.gauss_lobatto import CollGaussLobatto
 from pySDC.implementations.sweeper_classes.imex_1st_order import imex_1st_order
 from pySDC.implementations.transfer_classes.TransferMesh_FFT import mesh_to_mesh_fft
 from pySDC.implementations.controller_classes.allinclusive_classic_nonMPI import allinclusive_classic_nonMPI
 from pySDC.implementations.controller_classes.allinclusive_multigrid_nonMPI import allinclusive_multigrid_nonMPI
 
 from pySDC.helpers.stats_helper import filter_stats, sort_stats
+from pySDC.playgrounds.fft.libpfasst_output import libpfasst_output
 
 
 def main():
@@ -18,32 +20,34 @@ def main():
 
     # initialize level parameters
     level_params = dict()
-    level_params['restol'] = 1E-08
-    level_params['dt'] = 0.25
+    level_params['restol'] = 0E-08
+    level_params['dt'] = 0.9 / 32
     level_params['nsweeps'] = 1
 
     # initialize sweeper parameters
     sweeper_params = dict()
-    sweeper_params['collocation_class'] = CollGaussRadau_Right
-    sweeper_params['num_nodes'] = [3]
+    sweeper_params['collocation_class'] = CollGaussLobatto
+    sweeper_params['num_nodes'] = [5]
     sweeper_params['QI'] = ['LU']  # For the IMEX sweeper, the LU-trick can be activated for the implicit part
-    # sweeper_params['spread'] = False
+    sweeper_params['spread'] = True
+    sweeper_params['do_coll_update'] = False
 
     # initialize problem parameters
     problem_params = dict()
-    problem_params['nu'] = 1.0  # diffusion coefficient
+    problem_params['nu'] = 0.02  # diffusion coefficient
     problem_params['c'] = 1.0   # advection speed
-    problem_params['freq'] = 1  # frequency for the test value
-    problem_params['nvars'] = [16, 8]  # number of degrees of freedom for each level
+    problem_params['freq'] = -1  # frequency for the test value
+    problem_params['nvars'] = [64]  # number of degrees of freedom for each level
     problem_params['L'] = 1.0   # length of the interval [-L/2, L/2]
 
     # initialize step parameters
     step_params = dict()
-    step_params['maxiter'] = 50
+    step_params['maxiter'] = 8
 
     # initialize controller parameters
     controller_params = dict()
     controller_params['logger_level'] = 30
+    controller_params['hook_class'] = libpfasst_output
 
     # fill description dictionary for easy step instantiation
     description = dict()
@@ -55,13 +59,13 @@ def main():
     description['sweeper_params'] = sweeper_params  # pass sweeper parameters
     description['level_params'] = level_params  # pass level parameters
     description['step_params'] = step_params  # pass step parameters
-    description['space_transfer_class'] = mesh_to_mesh_fft  # pass spatial transfer class
-    description['space_transfer_params'] = dict()  # pass paramters for spatial transfer
+    # description['space_transfer_class'] = mesh_to_mesh_fft  # pass spatial transfer class
+    # description['space_transfer_params'] = dict()  # pass paramters for spatial transfer
 
     # set time parameters
     t0 = 0.0
-    Tend = 1.0
-    num_proc = 4
+    Tend = level_params['dt']
+    num_proc = 1
 
     # instantiate controller
     controller = allinclusive_classic_nonMPI(num_procs=num_proc, controller_params=controller_params,
