@@ -17,7 +17,7 @@ class output(hooks):
         self.counter = 0
         self.fig = None
         self.ax = None
-        self.output_ratio = 4
+        self.output_ratio = 1
 
     def post_step(self, step, level_number):
         """

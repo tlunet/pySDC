@@ -47,7 +47,7 @@ def setup_parameters():
     problem_params['nvars'] = None
     problem_params['eps'] = 0.04
     problem_params['radius'] = 0.25
-    problem_params['init_type'] = 'checkerboard'
+    problem_params['init_type'] = 'random'
 
     # initialize step parameters
     step_params = dict()

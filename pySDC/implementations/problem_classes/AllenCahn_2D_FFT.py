@@ -141,8 +141,8 @@ class allencahn2d_imex(ptype):
         elif self.params.init_type == 'checkerboard':
             xv, yv = np.meshgrid(self.xvalues, self.xvalues)
             me.values[:, :] = np.sin(2.0 * np.pi * xv) * np.sin(2.0 * np.pi * yv)
-            # print(me.values.shape)
-            # exit()
+        elif self.params.init_type == 'random':
+            me.values[:, :] = np.random.uniform(-1, 1, self.init)
         else:
             raise NotImplementedError('type of initial value not implemented, got %s' % self.params.init_type)
 
