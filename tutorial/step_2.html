@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Step-2: Data structures and my first sweeper &#8212; pySDC 3 documentation</title>
+    <meta charset="utf-8" />
+    <title>Step-2: Data structures and my first sweeper &#8212; pySDC 4.0 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -36,7 +34,7 @@
         <li class="right" >
           <a href="step_1.html" title="Step-1: A first spatial problem"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -62,12 +60,12 @@ its only level. This is the same test we ran
 <a class="reference external" href="../step_1/A_spatial_problem_setup.py">here</a>.</p>
 <p>Important things to note:</p>
 <ul class="simple">
-<li>This part is for demonstration purpose only. Normally, users do not
-have to deal with the internal data structures, see Part C below.</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">description</span></code> dictionary is the central steering tool for
-<code class="docutils literal notranslate"><span class="pre">pySDC</span></code>.</li>
-<li>Happily passing around classes instead of instances make life much
-easier, although it is not the best way in terms of programming…</li>
+<li><p>This part is for demonstration purpose only. Normally, users do not
+have to deal with the internal data structures, see Part C below.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">description</span></code> dictionary is the central steering tool for
+<code class="docutils literal notranslate"><span class="pre">pySDC</span></code>.</p></li>
+<li><p>Happily passing around classes instead of instances make life much
+easier, although it is not the best way in terms of programming…</p></li>
 </ul>
 <p>Full code: <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/blob/master/pySDC/tutorial/step_2/A_step_data_structure.py">pySDC/tutorial/step_2/A_step_data_structure.py</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pySDC.core.Step</span> <span class="kn">import</span> <span class="n">step</span>
@@ -158,18 +156,18 @@ the <code class="docutils literal notranslate"><span class="pre">step</span></co
 since we make use of parameters and status objects here.</p>
 <p>Important things to note:</p>
 <ul class="simple">
-<li>Again, this part is for demonstration purpose only. Normally, users
+<li><p>Again, this part is for demonstration purpose only. Normally, users
 do not have to deal with the internal data structures, see Part C
-below.</li>
-<li>Note the difference between status and parameter objects: parameters
+below.</p></li>
+<li><p>Note the difference between status and parameter objects: parameters
 are user-defined flags created using the dicitionaries (e.g.
 <code class="docutils literal notranslate"><span class="pre">maxiter</span></code> as part of the <code class="docutils literal notranslate"><span class="pre">step_params</span></code> in this example), while
 status objects are internal control objects which reflects the
-current status of a level or a step (e.g. <code class="docutils literal notranslate"><span class="pre">iter</span></code> or <code class="docutils literal notranslate"><span class="pre">time</span></code>).</li>
-<li>The logic required to implement an SDC iteration is simple but also
+current status of a level or a step (e.g. <code class="docutils literal notranslate"><span class="pre">iter</span></code> or <code class="docutils literal notranslate"><span class="pre">time</span></code>).</p></li>
+<li><p>The logic required to implement an SDC iteration is simple but also
 rather tedious. This will get worse if you want to deal with more
 than one step or, behold, multiple parallel steps each with a
-space-time hierarchy. Therefore, please proceed quickly to part C!</li>
+space-time hierarchy. Therefore, please proceed quickly to part C!</p></li>
 </ul>
 <p>Full code: <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/blob/master/pySDC/tutorial/step_2/B_my_first_sweeper.py">pySDC/tutorial/step_2/B_my_first_sweeper.py</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pySDC.core.Step</span> <span class="kn">import</span> <span class="n">step</span>
@@ -289,13 +287,13 @@ space-time hierarchy. Therefore, please proceed quickly to part C!</li>
 <span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span>  <span class="mi">3</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">8.80377584e-05</span>
 <span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span>  <span class="mi">4</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">1.21707911e-05</span>
 <span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span>  <span class="mi">5</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">1.38272028e-06</span>
-<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span>  <span class="mi">6</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">6.36445179e-07</span>
-<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span>  <span class="mi">7</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">1.68954002e-07</span>
-<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span>  <span class="mi">8</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">3.52600947e-08</span>
-<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span>  <span class="mi">9</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">6.07222462e-09</span>
-<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span> <span class="mi">10</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">8.28144487e-10</span>
-<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span> <span class="mi">11</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">1.18521295e-10</span>
-<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span> <span class="mi">12</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">1.48860733e-11</span>
+<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span>  <span class="mi">6</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">6.36445198e-07</span>
+<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span>  <span class="mi">7</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">1.68953681e-07</span>
+<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span>  <span class="mi">8</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">3.52585526e-08</span>
+<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span>  <span class="mi">9</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">6.07358204e-09</span>
+<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span> <span class="mi">10</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">8.27133896e-10</span>
+<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span> <span class="mi">11</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">1.18813641e-10</span>
+<span class="n">Time</span> <span class="mf">0.10</span> <span class="n">of</span> <span class="mi">0</span> <span class="o">--</span> <span class="n">Iteration</span><span class="p">:</span> <span class="mi">12</span> <span class="o">--</span> <span class="n">Residual</span><span class="p">:</span> <span class="mf">1.48677945e-11</span>
 </pre></div>
 </div>
 </div>
@@ -309,16 +307,16 @@ input dictionary (more on this in later tutorials). This is the default
 controller and does not require <code class="docutils literal notranslate"><span class="pre">mpi4py</span></code> to work.</p>
 <p>Important things to note:</p>
 <ul class="simple">
-<li>By using one of the controllers, the whole code relevant for the user
+<li><p>By using one of the controllers, the whole code relevant for the user
 is reduced to setting up the <code class="docutils literal notranslate"><span class="pre">description</span></code> dictionary, some pre-
-and some post-processing.</li>
-<li>During initializtion, the parameters used for the run are printed out. Also, user-defined/-changed parameters are indicated. This can be surpressed by setting the controller parameter <code class="docutils literal notranslate"><span class="pre">dump_setup</span></code> to False.</li>
-<li>We make use of <code class="docutils literal notranslate"><span class="pre">controller_parameters</span></code> in order to provide logging to file capabilities.</li>
-<li>In contrast to Part B, we do not have direct access to residuals or
-iteration counts for now. We will deal with these later.</li>
-<li>This example is the prototype for a user to work with pySDC. Most of
+and some post-processing.</p></li>
+<li><p>During initializtion, the parameters used for the run are printed out. Also, user-defined/-changed parameters are indicated. This can be surpressed by setting the controller parameter <code class="docutils literal notranslate"><span class="pre">dump_setup</span></code> to False.</p></li>
+<li><p>We make use of <code class="docutils literal notranslate"><span class="pre">controller_parameters</span></code> in order to provide logging to file capabilities.</p></li>
+<li><p>In contrast to Part B, we do not have direct access to residuals or
+iteration counts for now. We will deal with these later.</p></li>
+<li><p>This example is the prototype for a user to work with pySDC. Most of
 the logic and most of the data structures are hidden, but all
-relevant parameters are accessable using the <code class="docutils literal notranslate"><span class="pre">description</span></code>.</li>
+relevant parameters are accessable using the <code class="docutils literal notranslate"><span class="pre">description</span></code>.</p></li>
 </ul>
 <p>Full code: <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/blob/master/pySDC/tutorial/step_2/C_using_pySDCs_frontend.py">pySDC/tutorial/step_2/C_using_pySDCs_frontend.py</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pySDC.implementations.collocation_classes.gauss_radau_right</span> <span class="kn">import</span> <span class="n">CollGaussRadau_Right</span>
@@ -397,8 +395,8 @@ relevant parameters are accessable using the <code class="docutils literal notra
 </pre></div>
 </div>
 <p>Results:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>2020-02-21 09:51:59,433 - controller - Controller - dump_setup - 109 - INFO: Setup overview (--&gt; user-defined) -- BEGIN
-2020-02-21 09:51:59,433 - controller - Controller - dump_setup - 172 - INFO: ----------------------------------------------------------------------------------------------------
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>2021-08-12 09:07:47,718 - controller - Controller - dump_setup - 109 - INFO: Setup overview (--&gt; user-defined) -- BEGIN
+2021-08-12 09:07:47,718 - controller - Controller - dump_setup - 172 - INFO: ----------------------------------------------------------------------------------------------------
 
 Controller: &lt;class &#39;pySDC.implementations.controller_classes.controller_nonMPI.controller_nonMPI&#39;&gt;
     mssdc_jac = True
@@ -424,7 +422,7 @@ Step: &lt;class &#39;pySDC.core.Step.step&#39;&gt;
 --&gt;             freq = 4
 --&gt;             nvars = 1023
 --&gt;             Data type u: &lt;class &#39;pySDC.implementations.datatype_classes.mesh.mesh&#39;&gt;
---&gt;             Data type f: &lt;class &#39;pySDC.implementations.datatype_classes.mesh.rhs_imex_mesh&#39;&gt;
+--&gt;             Data type f: &lt;class &#39;pySDC.implementations.datatype_classes.mesh.imex_mesh&#39;&gt;
 --&gt;             Sweeper: &lt;class &#39;pySDC.implementations.sweeper_classes.imex_1st_order.imex_1st_order&#39;&gt;
                     do_coll_update = False
                     initial_guess = spread
@@ -433,33 +431,33 @@ Step: &lt;class &#39;pySDC.core.Step.step&#39;&gt;
                     QE = EE
 --&gt;                 Collocation: &lt;class &#39;pySDC.implementations.collocation_classes.gauss_radau_right.CollGaussRadau_Right&#39;&gt;
 
-2020-02-21 09:51:59,433 - controller - Controller - dump_setup - 174 - INFO: ----------------------------------------------------------------------------------------------------
-2020-02-21 09:51:59,433 - controller - Controller - dump_setup - 176 - INFO: Setup overview (--&gt; user-defined) -- END
+2021-08-12 09:07:47,718 - controller - Controller - dump_setup - 174 - INFO: ----------------------------------------------------------------------------------------------------
+2021-08-12 09:07:47,718 - controller - Controller - dump_setup - 176 - INFO: Setup overview (--&gt; user-defined) -- END
 
-2020-02-21 09:51:59,438 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  1 -- Sweep:  1 -- residual: 4.11190756e-03
-2020-02-21 09:51:59,443 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  2 -- Sweep:  1 -- residual: 6.68442665e-04
-2020-02-21 09:51:59,447 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  3 -- Sweep:  1 -- residual: 8.80377584e-05
-2020-02-21 09:51:59,452 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  4 -- Sweep:  1 -- residual: 1.21707911e-05
-2020-02-21 09:51:59,456 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  5 -- Sweep:  1 -- residual: 1.38272028e-06
-2020-02-21 09:51:59,460 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  6 -- Sweep:  1 -- residual: 6.36445179e-07
-2020-02-21 09:51:59,465 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  7 -- Sweep:  1 -- residual: 1.68954002e-07
-2020-02-21 09:51:59,469 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  8 -- Sweep:  1 -- residual: 3.52600947e-08
-2020-02-21 09:51:59,474 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  9 -- Sweep:  1 -- residual: 6.07222462e-09
-2020-02-21 09:51:59,478 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration: 10 -- Sweep:  1 -- residual: 8.28144487e-10
-2020-02-21 09:51:59,482 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration: 11 -- Sweep:  1 -- residual: 1.18521295e-10
-2020-02-21 09:51:59,486 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration: 12 -- Sweep:  1 -- residual: 1.48860733e-11
-2020-02-21 09:51:59,491 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  1 -- Sweep:  1 -- residual: 6.69984764e-03
-2020-02-21 09:51:59,496 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  2 -- Sweep:  1 -- residual: 1.05518433e-03
-2020-02-21 09:51:59,500 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  3 -- Sweep:  1 -- residual: 1.40642621e-04
-2020-02-21 09:51:59,504 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  4 -- Sweep:  1 -- residual: 1.85982064e-05
-2020-02-21 09:51:59,509 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  5 -- Sweep:  1 -- residual: 2.79216614e-06
-2020-02-21 09:51:59,513 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  6 -- Sweep:  1 -- residual: 1.12278726e-06
-2020-02-21 09:51:59,517 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  7 -- Sweep:  1 -- residual: 2.85495909e-07
-2020-02-21 09:51:59,521 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  8 -- Sweep:  1 -- residual: 5.78940990e-08
-2020-02-21 09:51:59,526 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  9 -- Sweep:  1 -- residual: 9.68219618e-09
-2020-02-21 09:51:59,530 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration: 10 -- Sweep:  1 -- residual: 1.26399996e-09
-2020-02-21 09:51:59,534 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration: 11 -- Sweep:  1 -- residual: 1.82774990e-10
-2020-02-21 09:51:59,539 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration: 12 -- Sweep:  1 -- residual: 1.98020420e-11
+2021-08-12 09:07:47,726 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  1 -- Sweep:  1 -- residual: 4.11190756e-03
+2021-08-12 09:07:47,733 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  2 -- Sweep:  1 -- residual: 6.68442665e-04
+2021-08-12 09:07:47,740 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  3 -- Sweep:  1 -- residual: 8.80377584e-05
+2021-08-12 09:07:47,746 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  4 -- Sweep:  1 -- residual: 1.21707911e-05
+2021-08-12 09:07:47,753 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  5 -- Sweep:  1 -- residual: 1.38272028e-06
+2021-08-12 09:07:47,759 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  6 -- Sweep:  1 -- residual: 6.36445198e-07
+2021-08-12 09:07:47,766 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  7 -- Sweep:  1 -- residual: 1.68953681e-07
+2021-08-12 09:07:47,772 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  8 -- Sweep:  1 -- residual: 3.52585526e-08
+2021-08-12 09:07:47,779 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration:  9 -- Sweep:  1 -- residual: 6.07358204e-09
+2021-08-12 09:07:47,786 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration: 10 -- Sweep:  1 -- residual: 8.27133896e-10
+2021-08-12 09:07:47,792 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration: 11 -- Sweep:  1 -- residual: 1.18813641e-10
+2021-08-12 09:07:47,798 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.100000 at stage         IT_FINE: Level: 0 -- Iteration: 12 -- Sweep:  1 -- residual: 1.48677945e-11
+2021-08-12 09:07:47,806 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  1 -- Sweep:  1 -- residual: 6.69984764e-03
+2021-08-12 09:07:47,812 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  2 -- Sweep:  1 -- residual: 1.05518433e-03
+2021-08-12 09:07:47,820 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  3 -- Sweep:  1 -- residual: 1.40642621e-04
+2021-08-12 09:07:47,827 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  4 -- Sweep:  1 -- residual: 1.85982046e-05
+2021-08-12 09:07:47,833 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  5 -- Sweep:  1 -- residual: 2.79216631e-06
+2021-08-12 09:07:47,840 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  6 -- Sweep:  1 -- residual: 1.12278770e-06
+2021-08-12 09:07:47,847 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  7 -- Sweep:  1 -- residual: 2.85495485e-07
+2021-08-12 09:07:47,853 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  8 -- Sweep:  1 -- residual: 5.78939715e-08
+2021-08-12 09:07:47,861 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration:  9 -- Sweep:  1 -- residual: 9.68180358e-09
+2021-08-12 09:07:47,867 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration: 10 -- Sweep:  1 -- residual: 1.26319477e-09
+2021-08-12 09:07:47,874 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration: 11 -- Sweep:  1 -- residual: 1.83442534e-10
+2021-08-12 09:07:47,880 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.200000 at stage         IT_FINE: Level: 0 -- Iteration: 12 -- Sweep:  1 -- residual: 1.99865229e-11
 Error after SDC iterations: 1.166689e-05
 </pre></div>
 </div>
@@ -496,17 +494,15 @@ Error after SDC iterations: 1.166689e-05
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -526,12 +522,12 @@ Error after SDC iterations: 1.166689e-05
         <li class="right" >
           <a href="step_1.html" title="Step-1: A first spatial problem"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, Robert Speck.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+        &#169; Copyright 2021, Robert Speck.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
     </div>
   </body>
 </html>

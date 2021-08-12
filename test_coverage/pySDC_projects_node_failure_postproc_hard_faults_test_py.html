@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
     <title>Coverage for pySDC/projects/node_failure/postproc_hard_faults_test.py: 100%</title>
+    <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -22,9 +23,9 @@
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             46 statements &nbsp;
-            <span class="run shortkey_r button_toggle_run">46 run</span>
-            <span class="mis show_mis shortkey_m button_toggle_mis">0 missing</span>
-            <span class="exc show_exc shortkey_x button_toggle_exc">3 excluded</span>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">46 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">0 missing</button>
+            <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">3 excluded</button>
         </h2>
     </div>
 </div>
@@ -78,7 +79,7 @@
     <p id="t25" class="pln"><span class="n"><a href="#t25">25</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t26" class="run"><span class="n"><a href="#t26">26</a></span><span class="t">    <span class="nam">vmin</span> <span class="op">=</span> <span class="num">99</span>&nbsp;</span><span class="r"></span></p>
     <p id="t27" class="run"><span class="n"><a href="#t27">27</a></span><span class="t">    <span class="nam">vmax</span> <span class="op">=</span> <span class="num">0</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t28" class="run"><span class="n"><a href="#t28">28</a></span><span class="t">    <span class="key">for</span> <span class="nam">file</span><span class="op">,</span> <span class="nam">strategy</span> <span class="key">in</span> <span class="nam">fields</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t28" class="run"><span class="n"><a href="#t28">28</a></span><span class="t">    <span class="key">for</span> <span class="nam">file</span><span class="op">,</span> <span class="nam">_</span> <span class="key">in</span> <span class="nam">fields</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t29" class="run"><span class="n"><a href="#t29">29</a></span><span class="t">        <span class="nam">infile</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">load</span><span class="op">(</span><span class="nam">cwd</span> <span class="op">+</span> <span class="str">'data/'</span> <span class="op">+</span> <span class="nam">file</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t30" class="pln"><span class="n"><a href="#t30">30</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t31" class="run"><span class="n"><a href="#t31">31</a></span><span class="t">        <span class="nam">data</span> <span class="op">=</span> <span class="nam">infile</span><span class="op">[</span><span class="str">'iter_count'</span><span class="op">]</span><span class="op">.</span><span class="nam">T</span>&nbsp;</span><span class="r"></span></p>
@@ -136,7 +137,7 @@
     <p id="t83" class="pln"><span class="n"><a href="#t83">83</a></span><span class="t">        <span class="com"># fname = setup+'_iteration_counts_hf_'+strategy+'.png'</span>&nbsp;</span><span class="r"></span></p>
     <p id="t84" class="run"><span class="n"><a href="#t84">84</a></span><span class="t">        <span class="nam">fname</span> <span class="op">=</span> <span class="str">'data/'</span> <span class="op">+</span> <span class="nam">setup</span> <span class="op">+</span> <span class="str">'_iteration_counts_hf_'</span> <span class="op">+</span> <span class="nam">strategy</span> <span class="op">+</span> <span class="str">'.png'</span>&nbsp;</span><span class="r"></span></p>
     <p id="t85" class="pln"><span class="n"><a href="#t85">85</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t86" class="run"><span class="n"><a href="#t86">86</a></span><span class="t">        <span class="nam">plt</span><span class="op">.</span><span class="nam">savefig</span><span class="op">(</span><span class="nam">fname</span><span class="op">,</span> <span class="nam">rasterized</span><span class="op">=</span><span class="key">True</span><span class="op">,</span> <span class="nam">transparent</span><span class="op">=</span><span class="key">True</span><span class="op">,</span> <span class="nam">bbox_inches</span><span class="op">=</span><span class="str">'tight'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t86" class="run"><span class="n"><a href="#t86">86</a></span><span class="t">        <span class="nam">plt</span><span class="op">.</span><span class="nam">savefig</span><span class="op">(</span><span class="nam">fname</span><span class="op">,</span> <span class="nam">transparent</span><span class="op">=</span><span class="key">True</span><span class="op">,</span> <span class="nam">bbox_inches</span><span class="op">=</span><span class="str">'tight'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t87" class="pln"><span class="n"><a href="#t87">87</a></span><span class="t">        <span class="com"># plt.savefig(fname, bbox_inches='tight')</span>&nbsp;</span><span class="r"></span></p>
     <p id="t88" class="pln"><span class="n"><a href="#t88">88</a></span><span class="t">        <span class="com"># os.system('pdfcrop ' + fname + ' ' + fname)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t89" class="pln"><span class="n"><a href="#t89">89</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -150,8 +151,8 @@
 <div id="footer">
     <div class="content">
         <p>
-            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.0.3</a>,
-            created at 2020-02-21 09:54
+            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
+            created at 2021-08-12 09:10 +0000
         </p>
     </div>
 </div>

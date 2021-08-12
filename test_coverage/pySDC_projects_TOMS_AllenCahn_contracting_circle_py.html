@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
     <title>Coverage for pySDC/projects/TOMS/AllenCahn_contracting_circle.py: 100%</title>
+    <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -22,9 +23,9 @@
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             189 statements &nbsp;
-            <span class="run shortkey_r button_toggle_run">189 run</span>
-            <span class="mis show_mis shortkey_m button_toggle_mis">0 missing</span>
-            <span class="exc show_exc shortkey_x button_toggle_exc">9 excluded</span>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">189 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">0 missing</button>
+            <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">9 excluded</button>
         </h2>
     </div>
 </div>
@@ -175,7 +176,7 @@
     <p id="t122" class="run"><span class="n"><a href="#t122">122</a></span><span class="t">        <span class="key">if</span> <span class="nam">inexact</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t123" class="run"><span class="n"><a href="#t123">123</a></span><span class="t">            <span class="nam">description</span><span class="op">[</span><span class="str">'problem_params'</span><span class="op">]</span><span class="op">[</span><span class="str">'newton_maxiter'</span><span class="op">]</span> <span class="op">=</span> <span class="num">1</span>&nbsp;</span><span class="r"></span></p>
     <p id="t124" class="pln"><span class="n"><a href="#t124">124</a></span><span class="t">    <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t125" class="exc show_exc"><span class="n"><a href="#t125">125</a></span><span class="t">        <span class="key">raise</span> <span class="nam">NotImplemented</span><span class="op">(</span><span class="str">'Wrong variant specified, got %s'</span> <span class="op">%</span> <span class="nam">variant</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t125" class="exc show_exc"><span class="n"><a href="#t125">125</a></span><span class="t">        <span class="key">raise</span> <span class="nam">NotImplementedError</span><span class="op">(</span><span class="str">'Wrong variant specified, got %s'</span> <span class="op">%</span> <span class="nam">variant</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t126" class="pln"><span class="n"><a href="#t126">126</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t127" class="run"><span class="n"><a href="#t127">127</a></span><span class="t">    <span class="key">if</span> <span class="nam">inexact</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t128" class="run"><span class="n"><a href="#t128">128</a></span><span class="t">        <span class="nam">out</span> <span class="op">=</span> <span class="str">'Working on inexact %s variant...'</span> <span class="op">%</span> <span class="nam">variant</span>&nbsp;</span><span class="r"></span></p>
@@ -253,7 +254,7 @@
     <p id="t200" class="run"><span class="n"><a href="#t200">200</a></span><span class="t">        <span class="nam">iter_counts</span> <span class="op">=</span> <span class="nam">sort_stats</span><span class="op">(</span><span class="nam">filter_stats</span><span class="op">(</span><span class="nam">item</span><span class="op">,</span> <span class="nam">type</span><span class="op">=</span><span class="str">'niter'</span><span class="op">)</span><span class="op">,</span> <span class="nam">sortby</span><span class="op">=</span><span class="str">'time'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t201" class="run"><span class="n"><a href="#t201">201</a></span><span class="t">        <span class="nam">niters</span><span class="op">[</span><span class="nam">key</span><span class="op">]</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">mean</span><span class="op">(</span><span class="nam">np</span><span class="op">.</span><span class="nam">array</span><span class="op">(</span><span class="op">[</span><span class="nam">item</span><span class="op">[</span><span class="num">1</span><span class="op">]</span> <span class="key">for</span> <span class="nam">item</span> <span class="key">in</span> <span class="nam">iter_counts</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t202" class="pln"><span class="n"><a href="#t202">202</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t203" class="run"><span class="n"><a href="#t203">203</a></span><span class="t">    <span class="nam">xcoords</span> <span class="op">=</span> <span class="op">[</span><span class="nam">i</span> <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">timings</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t203" class="run"><span class="n"><a href="#t203">203</a></span><span class="t">    <span class="nam">xcoords</span> <span class="op">=</span> <span class="nam">list</span><span class="op">(</span><span class="nam">range</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">timings</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t204" class="run"><span class="n"><a href="#t204">204</a></span><span class="t">    <span class="nam">sorted_timings</span> <span class="op">=</span> <span class="nam">sorted</span><span class="op">(</span><span class="op">[</span><span class="op">(</span><span class="nam">key</span><span class="op">,</span> <span class="nam">timings</span><span class="op">[</span><span class="nam">key</span><span class="op">]</span><span class="op">)</span> <span class="key">for</span> <span class="nam">key</span> <span class="key">in</span> <span class="nam">timings</span><span class="op">]</span><span class="op">,</span> <span class="nam">reverse</span><span class="op">=</span><span class="key">True</span><span class="op">,</span> <span class="nam">key</span><span class="op">=</span><span class="key">lambda</span> <span class="nam">tup</span><span class="op">:</span> <span class="nam">tup</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t205" class="run"><span class="n"><a href="#t205">205</a></span><span class="t">    <span class="nam">sorted_niters</span> <span class="op">=</span> <span class="op">[</span><span class="op">(</span><span class="nam">k</span><span class="op">,</span> <span class="nam">niters</span><span class="op">[</span><span class="nam">k</span><span class="op">]</span><span class="op">)</span> <span class="key">for</span> <span class="nam">k</span> <span class="key">in</span> <span class="op">[</span><span class="nam">key</span><span class="op">[</span><span class="num">0</span><span class="op">]</span> <span class="key">for</span> <span class="nam">key</span> <span class="key">in</span> <span class="nam">sorted_timings</span><span class="op">]</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p id="t206" class="run"><span class="n"><a href="#t206">206</a></span><span class="t">    <span class="nam">heights_timings</span> <span class="op">=</span> <span class="op">[</span><span class="nam">item</span><span class="op">[</span><span class="num">1</span><span class="op">]</span> <span class="key">for</span> <span class="nam">item</span> <span class="key">in</span> <span class="nam">sorted_timings</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
@@ -385,8 +386,8 @@
 <div id="footer">
     <div class="content">
         <p>
-            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.0.3</a>,
-            created at 2020-02-21 09:54
+            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
+            created at 2021-08-12 09:10 +0000
         </p>
     </div>
 </div>

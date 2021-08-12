@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
     <title>Coverage for pySDC/projects/parallelSDC/nonlinear_playground.py: 100%</title>
+    <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -22,9 +23,9 @@
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             109 statements &nbsp;
-            <span class="run shortkey_r button_toggle_run">109 run</span>
-            <span class="mis show_mis shortkey_m button_toggle_mis">0 missing</span>
-            <span class="exc show_exc shortkey_x button_toggle_exc">2 excluded</span>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">109 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">0 missing</button>
+            <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">2 excluded</button>
         </h2>
     </div>
 </div>
@@ -174,9 +175,9 @@
     <p id="t121" class="run"><span class="n"><a href="#t121">121</a></span><span class="t">    <span class="nam">results</span> <span class="op">=</span> <span class="nam">dict</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t122" class="run"><span class="n"><a href="#t122">122</a></span><span class="t">    <span class="nam">results</span><span class="op">[</span><span class="str">'interval'</span><span class="op">]</span> <span class="op">=</span> <span class="nam">problem_params</span><span class="op">[</span><span class="str">'interval'</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p id="t123" class="run"><span class="n"><a href="#t123">123</a></span><span class="t">    <span class="nam">results</span><span class="op">[</span><span class="str">'xvalues'</span><span class="op">]</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">array</span><span class="op">(</span><span class="op">[</span><span class="op">(</span><span class="nam">i</span> <span class="op">+</span> <span class="num">1</span> <span class="op">-</span> <span class="op">(</span><span class="nam">P</span><span class="op">.</span><span class="nam">params</span><span class="op">.</span><span class="nam">nvars</span> <span class="op">+</span> <span class="num">1</span><span class="op">)</span> <span class="op">/</span> <span class="num">2</span><span class="op">)</span> <span class="op">*</span> <span class="nam">P</span><span class="op">.</span><span class="nam">dx</span> <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="nam">P</span><span class="op">.</span><span class="nam">params</span><span class="op">.</span><span class="nam">nvars</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t124" class="run"><span class="n"><a href="#t124">124</a></span><span class="t">    <span class="nam">results</span><span class="op">[</span><span class="str">'uinit'</span><span class="op">]</span> <span class="op">=</span> <span class="nam">uinit</span><span class="op">.</span><span class="nam">values</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t125" class="run"><span class="n"><a href="#t125">125</a></span><span class="t">    <span class="nam">results</span><span class="op">[</span><span class="str">'uend'</span><span class="op">]</span> <span class="op">=</span> <span class="nam">uend</span><span class="op">.</span><span class="nam">values</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t126" class="run"><span class="n"><a href="#t126">126</a></span><span class="t">    <span class="nam">results</span><span class="op">[</span><span class="str">'uex'</span><span class="op">]</span> <span class="op">=</span> <span class="nam">uex</span><span class="op">.</span><span class="nam">values</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t124" class="run"><span class="n"><a href="#t124">124</a></span><span class="t">    <span class="nam">results</span><span class="op">[</span><span class="str">'uinit'</span><span class="op">]</span> <span class="op">=</span> <span class="nam">uinit</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t125" class="run"><span class="n"><a href="#t125">125</a></span><span class="t">    <span class="nam">results</span><span class="op">[</span><span class="str">'uend'</span><span class="op">]</span> <span class="op">=</span> <span class="nam">uend</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t126" class="run"><span class="n"><a href="#t126">126</a></span><span class="t">    <span class="nam">results</span><span class="op">[</span><span class="str">'uex'</span><span class="op">]</span> <span class="op">=</span> <span class="nam">uex</span>&nbsp;</span><span class="r"></span></p>
     <p id="t127" class="pln"><span class="n"><a href="#t127">127</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t128" class="pln"><span class="n"><a href="#t128">128</a></span><span class="t">    <span class="com"># write out for later visualization</span>&nbsp;</span><span class="r"></span></p>
     <p id="t129" class="run"><span class="n"><a href="#t129">129</a></span><span class="t">    <span class="nam">file</span> <span class="op">=</span> <span class="nam">open</span><span class="op">(</span><span class="str">'data/parallelSDC_results_graphs.pkl'</span><span class="op">,</span> <span class="str">'wb'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
@@ -233,8 +234,8 @@
 <div id="footer">
     <div class="content">
         <p>
-            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.0.3</a>,
-            created at 2020-02-21 09:54
+            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
+            created at 2021-08-12 09:10 +0000
         </p>
     </div>
 </div>

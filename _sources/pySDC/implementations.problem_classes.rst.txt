@@ -44,14 +44,6 @@ implementations.problem\_classes.AdvectionEquation\_1D\_FD\_dirichlet module
     :undoc-members:
     :show-inheritance:
 
-implementations.problem\_classes.AdvectionEquation\_ND\_FD\_periodic module
----------------------------------------------------------------------------
-
-.. automodule:: implementations.problem_classes.AdvectionEquation_ND_FD_periodic
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 implementations.problem\_classes.AllenCahn\_1D\_FD module
 ---------------------------------------------------------
 
@@ -164,14 +156,6 @@ implementations.problem\_classes.GrayScott\_2D\_PETSc\_periodic module
     :undoc-members:
     :show-inheritance:
 
-implementations.problem\_classes.GrayScott\_MPIFFT module
----------------------------------------------------------
-
-.. automodule:: implementations.problem_classes.GrayScott_MPIFFT
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 implementations.problem\_classes.HarmonicOscillator module
 ----------------------------------------------------------
 
@@ -236,26 +220,10 @@ implementations.problem\_classes.HeatEquation\_2D\_PETSc\_forced module
     :undoc-members:
     :show-inheritance:
 
-implementations.problem\_classes.HeatEquation\_ND\_FD\_forced\_periodic module
-------------------------------------------------------------------------------
-
-.. automodule:: implementations.problem_classes.HeatEquation_ND_FD_forced_periodic
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 implementations.problem\_classes.HenonHeiles module
 ---------------------------------------------------
 
 .. automodule:: implementations.problem_classes.HenonHeiles
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-implementations.problem\_classes.NonlinearSchroedinger\_MPIFFT module
----------------------------------------------------------------------
-
-.. automodule:: implementations.problem_classes.NonlinearSchroedinger_MPIFFT
     :members:
     :undoc-members:
     :show-inheritance:

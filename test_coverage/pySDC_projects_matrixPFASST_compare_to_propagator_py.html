@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
     <title>Coverage for pySDC/projects/matrixPFASST/compare_to_propagator.py: 100%</title>
+    <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -22,9 +23,9 @@
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             133 statements &nbsp;
-            <span class="run shortkey_r button_toggle_run">133 run</span>
-            <span class="mis show_mis shortkey_m button_toggle_mis">0 missing</span>
-            <span class="exc show_exc shortkey_x button_toggle_exc">26 excluded</span>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">133 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">0 missing</button>
+            <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">26 excluded</button>
         </h2>
     </div>
 </div>
@@ -292,12 +293,12 @@
     <p id="t239" class="pln"><span class="n"><a href="#t239">239</a></span><span class="t">    <span class="com"># build propagation matrix using the prescribed number of iterations (or any other, if needed)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t240" class="run"><span class="n"><a href="#t240">240</a></span><span class="t">    <span class="nam">prop</span> <span class="op">=</span> <span class="nam">controller</span><span class="op">.</span><span class="nam">build_propagation_matrix</span><span class="op">(</span><span class="nam">niter</span><span class="op">=</span><span class="nam">niter</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t241" class="pln"><span class="n"><a href="#t241">241</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p id="t242" class="run"><span class="n"><a href="#t242">242</a></span><span class="t">    <span class="nam">err_prop_ex</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">linalg</span><span class="op">.</span><span class="nam">norm</span><span class="op">(</span><span class="nam">prop</span><span class="op">.</span><span class="nam">dot</span><span class="op">(</span><span class="nam">uinit</span><span class="op">.</span><span class="nam">values</span><span class="op">)</span> <span class="op">-</span> <span class="nam">uex</span><span class="op">.</span><span class="nam">values</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t243" class="run"><span class="n"><a href="#t243">243</a></span><span class="t">    <span class="nam">err_mat_ex</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">linalg</span><span class="op">.</span><span class="nam">norm</span><span class="op">(</span><span class="nam">uend_mat</span><span class="op">.</span><span class="nam">values</span> <span class="op">-</span> <span class="nam">uex</span><span class="op">.</span><span class="nam">values</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t242" class="run"><span class="n"><a href="#t242">242</a></span><span class="t">    <span class="nam">err_prop_ex</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">linalg</span><span class="op">.</span><span class="nam">norm</span><span class="op">(</span><span class="nam">prop</span><span class="op">.</span><span class="nam">dot</span><span class="op">(</span><span class="nam">uinit</span><span class="op">)</span> <span class="op">-</span> <span class="nam">uex</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t243" class="run"><span class="n"><a href="#t243">243</a></span><span class="t">    <span class="nam">err_mat_ex</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">linalg</span><span class="op">.</span><span class="nam">norm</span><span class="op">(</span><span class="nam">uend_mat</span> <span class="op">-</span> <span class="nam">uex</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t244" class="run"><span class="n"><a href="#t244">244</a></span><span class="t">    <span class="nam">out</span> <span class="op">=</span> <span class="str">'  Error (mat/prop) vs. exact solution: %6.4e -- %6.4e'</span> <span class="op">%</span> <span class="op">(</span><span class="nam">err_mat_ex</span><span class="op">,</span> <span class="nam">err_prop_ex</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t245" class="run"><span class="n"><a href="#t245">245</a></span><span class="t">    <span class="nam">f</span><span class="op">.</span><span class="nam">write</span><span class="op">(</span><span class="nam">out</span> <span class="op">+</span> <span class="str">'\n'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t246" class="run"><span class="n"><a href="#t246">246</a></span><span class="t">    <span class="nam">print</span><span class="op">(</span><span class="nam">out</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t247" class="run"><span class="n"><a href="#t247">247</a></span><span class="t">    <span class="nam">err_mat_prop</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">linalg</span><span class="op">.</span><span class="nam">norm</span><span class="op">(</span><span class="nam">prop</span><span class="op">.</span><span class="nam">dot</span><span class="op">(</span><span class="nam">uinit</span><span class="op">.</span><span class="nam">values</span><span class="op">)</span> <span class="op">-</span> <span class="nam">uend_mat</span><span class="op">.</span><span class="nam">values</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t247" class="run"><span class="n"><a href="#t247">247</a></span><span class="t">    <span class="nam">err_mat_prop</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">linalg</span><span class="op">.</span><span class="nam">norm</span><span class="op">(</span><span class="nam">prop</span><span class="op">.</span><span class="nam">dot</span><span class="op">(</span><span class="nam">uinit</span><span class="op">)</span> <span class="op">-</span> <span class="nam">uend_mat</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t248" class="run"><span class="n"><a href="#t248">248</a></span><span class="t">    <span class="nam">out</span> <span class="op">=</span> <span class="str">'  Difference between matrix-PFASST and propagator: %6.4e'</span> <span class="op">%</span> <span class="nam">err_mat_prop</span>&nbsp;</span><span class="r"></span></p>
     <p id="t249" class="run"><span class="n"><a href="#t249">249</a></span><span class="t">    <span class="nam">f</span><span class="op">.</span><span class="nam">write</span><span class="op">(</span><span class="nam">out</span> <span class="op">+</span> <span class="str">'\n'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t250" class="run"><span class="n"><a href="#t250">250</a></span><span class="t">    <span class="nam">print</span><span class="op">(</span><span class="nam">out</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
@@ -324,8 +325,8 @@
 <div id="footer">
     <div class="content">
         <p>
-            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.0.3</a>,
-            created at 2020-02-21 09:54
+            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
+            created at 2021-08-12 09:10 +0000
         </p>
     </div>
 </div>

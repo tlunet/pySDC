@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
     <title>Coverage for pySDC/helpers/transfer_helper.py: 77%</title>
+    <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -22,9 +23,9 @@
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             136 statements &nbsp;
-            <span class="run shortkey_r button_toggle_run">105 run</span>
-            <span class="mis show_mis shortkey_m button_toggle_mis">31 missing</span>
-            <span class="exc show_exc shortkey_x button_toggle_exc">0 excluded</span>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">105 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">31 missing</button>
+            <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
         </h2>
     </div>
 </div>
@@ -84,7 +85,7 @@
     <p id="t31" class="pln"><span class="n"><a href="#t31">31</a></span><span class="t">    <span class="com"># sort by distance</span>&nbsp;</span><span class="r"></span></p>
     <p id="t32" class="mis show_mis"><span class="n"><a href="#t32">32</a></span><span class="t">    <span class="nam">value_index_sorted</span> <span class="op">=</span> <span class="nam">sorted</span><span class="op">(</span><span class="nam">value_index</span><span class="op">,</span> <span class="nam">key</span><span class="op">=</span><span class="key">lambda</span> <span class="nam">s</span><span class="op">:</span> <span class="nam">s</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t33" class="pln"><span class="n"><a href="#t33">33</a></span><span class="t">    <span class="com"># take first k indices with least distance and sort them</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t34" class="mis show_mis"><span class="n"><a href="#t34">34</a></span><span class="t">    <span class="key">return</span> <span class="nam">sorted</span><span class="op">(</span><span class="nam">list</span><span class="op">(</span><span class="nam">map</span><span class="op">(</span><span class="key">lambda</span> <span class="nam">s</span><span class="op">:</span> <span class="nam">s</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">,</span> <span class="nam">value_index_sorted</span><span class="op">[</span><span class="num">0</span><span class="op">:</span><span class="nam">k</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t34" class="mis show_mis"><span class="n"><a href="#t34">34</a></span><span class="t">    <span class="key">return</span> <span class="nam">sorted</span><span class="op">(</span><span class="nam">map</span><span class="op">(</span><span class="key">lambda</span> <span class="nam">s</span><span class="op">:</span> <span class="nam">s</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">,</span> <span class="nam">value_index_sorted</span><span class="op">[</span><span class="num">0</span><span class="op">:</span><span class="nam">k</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t35" class="pln"><span class="n"><a href="#t35">35</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t36" class="pln"><span class="n"><a href="#t36">36</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t37" class="run"><span class="n"><a href="#t37">37</a></span><span class="t"><span class="key">def</span> <span class="nam">next_neighbors</span><span class="op">(</span><span class="nam">p</span><span class="op">,</span> <span class="nam">ps</span><span class="op">,</span> <span class="nam">k</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -110,7 +111,7 @@
     <p id="t57" class="pln"><span class="n"><a href="#t57">57</a></span><span class="t">    <span class="com"># sort by distance</span>&nbsp;</span><span class="r"></span></p>
     <p id="t58" class="run"><span class="n"><a href="#t58">58</a></span><span class="t">    <span class="nam">value_index_sorted</span> <span class="op">=</span> <span class="nam">sorted</span><span class="op">(</span><span class="nam">value_index</span><span class="op">,</span> <span class="nam">key</span><span class="op">=</span><span class="key">lambda</span> <span class="nam">s</span><span class="op">:</span> <span class="nam">s</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t59" class="pln"><span class="n"><a href="#t59">59</a></span><span class="t">    <span class="com"># take first k indices with least distance and sort them</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t60" class="run"><span class="n"><a href="#t60">60</a></span><span class="t">    <span class="key">return</span> <span class="nam">sorted</span><span class="op">(</span><span class="nam">list</span><span class="op">(</span><span class="nam">map</span><span class="op">(</span><span class="key">lambda</span> <span class="nam">s</span><span class="op">:</span> <span class="nam">s</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">,</span> <span class="nam">value_index_sorted</span><span class="op">[</span><span class="num">0</span><span class="op">:</span><span class="nam">k</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t60" class="run"><span class="n"><a href="#t60">60</a></span><span class="t">    <span class="key">return</span> <span class="nam">sorted</span><span class="op">(</span><span class="nam">map</span><span class="op">(</span><span class="key">lambda</span> <span class="nam">s</span><span class="op">:</span> <span class="nam">s</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">,</span> <span class="nam">value_index_sorted</span><span class="op">[</span><span class="num">0</span><span class="op">:</span><span class="nam">k</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t61" class="pln"><span class="n"><a href="#t61">61</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t62" class="pln"><span class="n"><a href="#t62">62</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t63" class="run"><span class="n"><a href="#t63">63</a></span><span class="t"><span class="key">def</span> <span class="nam">continue_periodic_array</span><span class="op">(</span><span class="nam">arr</span><span class="op">,</span> <span class="nam">nn</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -319,7 +320,7 @@
     <p id="t266" class="pln"><span class="n"><a href="#t266">266</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t267" class="run"><span class="n"><a href="#t267">267</a></span><span class="t">    <span class="key">assert</span> <span class="nam">l</span> <span class="op">&lt;</span> <span class="nam">grid</span><span class="op">.</span><span class="nam">size</span> <span class="key">and</span> <span class="nam">r</span> <span class="op">&lt;</span> <span class="nam">grid</span><span class="op">.</span><span class="nam">size</span>&nbsp;</span><span class="r"></span></p>
     <p id="t268" class="run"><span class="n"><a href="#t268">268</a></span><span class="t">    <span class="nam">padded_arr</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">zeros</span><span class="op">(</span><span class="nam">grid</span><span class="op">.</span><span class="nam">size</span> <span class="op">+</span> <span class="nam">l</span> <span class="op">+</span> <span class="nam">r</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t269" class="run"><span class="n"><a href="#t269">269</a></span><span class="t">    <span class="key">if</span> <span class="nam">pad_type</span> <span class="key">is</span> <span class="str">'mirror'</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t269" class="run"><span class="n"><a href="#t269">269</a></span><span class="t">    <span class="key">if</span> <span class="nam">pad_type</span> <span class="op">==</span> <span class="str">'mirror'</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t270" class="run"><span class="n"><a href="#t270">270</a></span><span class="t">        <span class="key">for</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="nam">l</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t271" class="run"><span class="n"><a href="#t271">271</a></span><span class="t">            <span class="nam">padded_arr</span><span class="op">[</span><span class="nam">i</span><span class="op">]</span> <span class="op">=</span> <span class="num">2</span> <span class="op">*</span> <span class="nam">grid</span><span class="op">[</span><span class="num">0</span><span class="op">]</span> <span class="op">-</span> <span class="nam">grid</span><span class="op">[</span><span class="nam">l</span> <span class="op">-</span> <span class="nam">i</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p id="t272" class="run"><span class="n"><a href="#t272">272</a></span><span class="t">        <span class="key">for</span> <span class="nam">j</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="nam">r</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -330,8 +331,8 @@
 <div id="footer">
     <div class="content">
         <p>
-            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.0.3</a>,
-            created at 2020-02-21 09:54
+            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
+            created at 2021-08-12 09:10 +0000
         </p>
     </div>
 </div>

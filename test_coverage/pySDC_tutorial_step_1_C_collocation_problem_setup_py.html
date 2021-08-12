@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
     <title>Coverage for pySDC/tutorial/step_1/C_collocation_problem_setup.py: 100%</title>
+    <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jquery.hotkeys.js"></script>
@@ -22,9 +23,9 @@
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             29 statements &nbsp;
-            <span class="run shortkey_r button_toggle_run">29 run</span>
-            <span class="mis show_mis shortkey_m button_toggle_mis">0 missing</span>
-            <span class="exc show_exc shortkey_x button_toggle_exc">2 excluded</span>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">29 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">0 missing</button>
+            <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">2 excluded</button>
         </h2>
     </div>
 </div>
@@ -113,7 +114,7 @@
     <p id="t60" class="pln"><span class="n"><a href="#t60">60</a></span><span class="t">    <span class="com"># get initial value at t0 = 0</span>&nbsp;</span><span class="r"></span></p>
     <p id="t61" class="run"><span class="n"><a href="#t61">61</a></span><span class="t">    <span class="nam">u0</span> <span class="op">=</span> <span class="nam">prob</span><span class="op">.</span><span class="nam">u_exact</span><span class="op">(</span><span class="nam">t</span><span class="op">=</span><span class="num">0</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t62" class="pln"><span class="n"><a href="#t62">62</a></span><span class="t">    <span class="com"># fill in u0-vector as right-hand side for the collocation problem</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t63" class="run"><span class="n"><a href="#t63">63</a></span><span class="t">    <span class="nam">u0_coll</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">kron</span><span class="op">(</span><span class="nam">np</span><span class="op">.</span><span class="nam">ones</span><span class="op">(</span><span class="nam">coll</span><span class="op">.</span><span class="nam">num_nodes</span><span class="op">)</span><span class="op">,</span> <span class="nam">u0</span><span class="op">.</span><span class="nam">values</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t63" class="run"><span class="n"><a href="#t63">63</a></span><span class="t">    <span class="nam">u0_coll</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">kron</span><span class="op">(</span><span class="nam">np</span><span class="op">.</span><span class="nam">ones</span><span class="op">(</span><span class="nam">coll</span><span class="op">.</span><span class="nam">num_nodes</span><span class="op">)</span><span class="op">,</span> <span class="nam">u0</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t64" class="pln"><span class="n"><a href="#t64">64</a></span><span class="t">    <span class="com"># get exact solution at Tend = dt</span>&nbsp;</span><span class="r"></span></p>
     <p id="t65" class="run"><span class="n"><a href="#t65">65</a></span><span class="t">    <span class="nam">uend</span> <span class="op">=</span> <span class="nam">prob</span><span class="op">.</span><span class="nam">u_exact</span><span class="op">(</span><span class="nam">t</span><span class="op">=</span><span class="nam">dt</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t66" class="pln"><span class="n"><a href="#t66">66</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -121,7 +122,7 @@
     <p id="t68" class="run"><span class="n"><a href="#t68">68</a></span><span class="t">    <span class="nam">u_coll</span> <span class="op">=</span> <span class="nam">sp</span><span class="op">.</span><span class="nam">linalg</span><span class="op">.</span><span class="nam">spsolve</span><span class="op">(</span><span class="nam">M</span><span class="op">,</span> <span class="nam">u0_coll</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t69" class="pln"><span class="n"><a href="#t69">69</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t70" class="pln"><span class="n"><a href="#t70">70</a></span><span class="t">    <span class="com"># compute error</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t71" class="run"><span class="n"><a href="#t71">71</a></span><span class="t">    <span class="nam">err</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">linalg</span><span class="op">.</span><span class="nam">norm</span><span class="op">(</span><span class="nam">u_coll</span><span class="op">[</span><span class="op">-</span><span class="nam">prob</span><span class="op">.</span><span class="nam">params</span><span class="op">.</span><span class="nam">nvars</span><span class="op">:</span><span class="op">]</span> <span class="op">-</span> <span class="nam">uend</span><span class="op">.</span><span class="nam">values</span><span class="op">,</span> <span class="nam">np</span><span class="op">.</span><span class="nam">inf</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t71" class="run"><span class="n"><a href="#t71">71</a></span><span class="t">    <span class="nam">err</span> <span class="op">=</span> <span class="nam">np</span><span class="op">.</span><span class="nam">linalg</span><span class="op">.</span><span class="nam">norm</span><span class="op">(</span><span class="nam">u_coll</span><span class="op">[</span><span class="op">-</span><span class="nam">prob</span><span class="op">.</span><span class="nam">params</span><span class="op">.</span><span class="nam">nvars</span><span class="op">:</span><span class="op">]</span> <span class="op">-</span> <span class="nam">uend</span><span class="op">,</span> <span class="nam">np</span><span class="op">.</span><span class="nam">inf</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t72" class="pln"><span class="n"><a href="#t72">72</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t73" class="run"><span class="n"><a href="#t73">73</a></span><span class="t">    <span class="key">return</span> <span class="nam">err</span>&nbsp;</span><span class="r"></span></p>
     <p id="t74" class="pln"><span class="n"><a href="#t74">74</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -132,8 +133,8 @@
 <div id="footer">
     <div class="content">
         <p>
-            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.0.3</a>,
-            created at 2020-02-21 09:54
+            <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
+            created at 2021-08-12 09:10 +0000
         </p>
     </div>
 </div>
