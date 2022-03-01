@@ -1,18 +1,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Welcome to pySDC! &#8212; pySDC 4.0 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Welcome to pySDC! &#8212; pySDC 4.2.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -30,7 +31,8 @@
         <li class="right" >
           <a href="tutorial/step_1.html" title="Step-1: A first spatial problem"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to pySDC!</a></li> 
       </ul>
     </div>  
 
@@ -39,12 +41,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="welcome-to-pysdc">
+  <section id="welcome-to-pysdc">
 <h1>Welcome to pySDC!<a class="headerlink" href="#welcome-to-pysdc" title="Permalink to this headline">¶</a></h1>
 <p>The <cite>pySDC</cite> project is a Python implementation of the spectral deferred correction (SDC) approach and its flavors,
 esp. the multilevel extension MLSDC and PFASST. It is intended for rapid prototyping and educational purposes.
 New ideas like e.g. sweepers or predictors can be tested and first toy problems can be easily implemented.</p>
-<div class="section" id="features">
+<section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Variants of SDC: explicit, implicit, IMEX, multi-implicit, Verlet, multi-level, diagonal, multi-step</p></li>
@@ -52,12 +54,12 @@ New ideas like e.g. sweepers or predictors can be tested and first toy problems 
 <li><p>8 tutorials: from setting up a first collocation problem to SDC, PFASST and advanced topics</p></li>
 <li><p>Projects: many documented projects with defined and tested outcomes</p></li>
 <li><p>Many different examples, collocation types, data types already implemented</p></li>
-<li><p>Works with <a class="reference external" href="http://www.mcs.anl.gov/petsc/">PETSc</a> through <a class="reference external" href="https://bitbucket.org/petsc/petsc4py">petsc4py</a> , <a class="reference external" href="https://fenicsproject.org/">FEniCS</a> and <a class="reference external" href="https://mpi4py-fft.readthedocs.io/en/latest/">mpi4py-fft</a></p></li>
+<li><p>Works with <a class="reference external" href="https://fenicsproject.org/">FEniCS</a>, <a class="reference external" href="https://mpi4py-fft.readthedocs.io/en/latest/">mpi4py-fft</a> and <a class="reference external" href="http://www.mcs.anl.gov/petsc/">PETSc</a> (through <a class="reference external" href="https://bitbucket.org/petsc/petsc4py">petsc4py</a>)</p></li>
 <li><p>Continuous integration via <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/actions">Github Actions</a></p></li>
-<li><p>Fully compatible with 3.6 (or higher)</p></li>
+<li><p>Fully compatible with Python 3.6 - 3.9</p></li>
 </ul>
-</div>
-<div class="section" id="getting-started">
+</section>
+<section id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
 <p>The code is hosted on GitHub, see <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC">https://github.com/Parallel-in-Time/pySDC</a>, and PyPI, see <a class="reference external" href="https://pypi.python.org/pypi/pySDC">https://pypi.python.org/pypi/pySDC</a>.
 Use</p>
@@ -86,12 +88,18 @@ You can achieve this e.g. by</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda install -c conda-forge mpich petsc4py mpi4py fenics
 </pre></div>
 </div>
-<p>Most of the code is tested automatically using <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/actions">Github Actions</a>, so a working version of the installation process can always be found in the <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/blob/master/.github/workflows/ci_pipeline.yml">ci_pipeline.yml</a> file.</p>
+<p>Most of the code is tested automatically using <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/actions">Github Actions</a>, so
+a working version of the installation process can always be found in the <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/blob/master/.github/workflows/ci_pipeline.yml">ci_pipeline.yml</a> file.
+This workflow can be run locally using <a class="reference external" href="https://github.com/nektos/act">act</a> by</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>act --env <span class="nv">CONDA</span><span class="o">=</span>/usr/share/miniconda -j ci
+</pre></div>
+</div>
+<p>See also <a class="reference external" href="https://github.com/lmmx/devnotes/wiki/Running-GitHub-CI-locally-with-nektos-act-(Docker)-in-LXC">this page</a> for details on how to run workflows depending on miniconda locally.</p>
 <p>For many examples, <cite>LaTeX</cite> is used for the plots, i.e. a decent installation of this is needed in order to run the tests.
 When using <cite>fenics</cite> or <cite>petsc4py</cite>, a C++ compiler is required (although installation may go through at first).</p>
 <p>For more details on <cite>pySDC</cite>, check out <a class="reference external" href="http://www.parallel-in-time.org/pySDC">http://www.parallel-in-time.org/pySDC</a>.</p>
-</div>
-<div class="section" id="how-to-cite">
+</section>
+<section id="how-to-cite">
 <h2>How to cite<a class="headerlink" href="#how-to-cite" title="Permalink to this headline">¶</a></h2>
 <p>If you use pySDC or parts of it for your work, great! Let us know if we can help you with this. Also, we would greatly appreciate a citation of <a class="reference external" href="https://doi.org/10.1145/3310410">this paper</a>:</p>
 <blockquote>
@@ -100,10 +108,15 @@ ACM Transactions on Mathematical Software (TOMS), Volume 45 Issue 3, August 2019
 <a class="reference external" href="https://doi.org/10.1145/3310410">https://doi.org/10.1145/3310410</a></p>
 </div></blockquote>
 <p>The current software release can be cited using Zenodo: <a class="reference external" href="https://zenodo.org/badge/latestdoi/26165004"><img alt="zenodo" src="https://zenodo.org/badge/26165004.svg" /></a></p>
-</div>
-<div class="section" id="changelog">
+</section>
+<section id="changelog">
 <h2>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
 <ul>
+<li><p>December 13, 2021: Version 4.2 brings compatibility with Python 3.9, including some code cleanup. The CI test
+suite seems to run faster now, since sorting out the dependencies is faster. Tested <a class="reference external" href="https://github.com/mamba-org/mamba">mamba</a>,
+which for now makes the CI pipeline much faster. Also, the CI workflow can now run locally using <a class="reference external" href="https://github.com/nektos/act">act</a>.
+We introduced markers for soem of the tests in preparation of distributed tests on different platforms. And finally, a LaTeX
+installation is no longer needed use plotting (but recommended).</p></li>
 <li><p>August 11, 2021: Version 4.1 has some more changes under the hood, most of them with no significant impact to users.
 The CI pipeline has been completely rewritten, porting the code to <a class="reference external" href="https://github.com/features/actions">Github Actions</a>
 (away from <a class="reference external" href="https://travis-ci.com/">Travis CI</a>), to <a class="reference external" href="https://flake8.pycqa.org">flake8</a> and to <a class="reference external" href="https://pytest.org">pytest</a>
@@ -200,8 +213,8 @@ Most of the code is supported by tests, mainly realized by using the tutorial as
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="tutorial">
+</section>
+<section id="tutorial">
 <h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
 <p>To flatten the steep learning curve of SDC and the likes, this tutorial contains eight steps to introduce, demonstrate and briefly discuss the main features of pySDC.
 We start with a simple problem setup, add the collocation problem, solve this via SDC, MLSDC and finally PFASST and discuss further extensions.
@@ -220,15 +233,15 @@ The results are shown within the description and can be found here (yes, yes, Ju
 <li class="toctree-l1"><a class="reference internal" href="tutorial/step_8.html">Step-8: Advanced topics</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="playgrounds">
+</section>
+<section id="playgrounds">
 <h2>Playgrounds<a class="headerlink" href="#playgrounds" title="Permalink to this headline">¶</a></h2>
 <p>This folder gathers various small to medium experiments done with pySDC. They are for example grouped by application (e.g. <code class="docutils literal notranslate"><span class="pre">Boris</span></code>) or by problem type (e.g. <code class="docutils literal notranslate"><span class="pre">ODEs</span></code>).
 Also, the <code class="docutils literal notranslate"><span class="pre">deprecated</span></code> folder lists a few old applications which have not been ported to the current version of <cite>pySDC</cite>.
 Experiments which become more complex or which eventually evolve into a publication of any form should go to the <code class="docutils literal notranslate"><span class="pre">projects</span></code> folder and should receive proper documentation and description.
 The playground codes are supposed to be cleaned up, but there is no detailed documentation available.</p>
-</div>
-<div class="section" id="projects">
+</section>
+<section id="projects">
 <h2>Projects<a class="headerlink" href="#projects" title="Permalink to this headline">¶</a></h2>
 <p>In the <code class="docutils literal notranslate"><span class="pre">projects</span></code> folder we gather focussed experiments with pySDC which go beyond simple toy problems or feature tests.
 In particular, projects are structured and documented codes which form the basis for publications or presentations.
@@ -248,13 +261,13 @@ Parts of the Python scripts are supported by tests and checked for PEP8 conformi
 <li class="toctree-l1"><a class="reference internal" href="projects/performance.html">Performance analysis of pySDC</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="tests">
+</section>
+<section id="tests">
 <h2>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h2>
 <p>Most of the code is supported by tests, mainly realized by using the tutorial as the test routines with clearly defined results. Also, projects are accompanied by tests.</p>
 <p>Github Action reports: <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/actions/workflows/ci_pipeline.yml"><img alt="badge" src="https://github.com/Parallel-in-Time/pySDC/actions/workflows/ci_pipeline.yml/badge.svg" /></a>, test coverage results can be found <a class="reference external" href="test_coverage/index.html">here</a>.</p>
-</div>
-<div class="section" id="api-documentation">
+</section>
+<section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <p>The Python files contained in <code class="docutils literal notranslate"><span class="pre">core</span></code>, <code class="docutils literal notranslate"><span class="pre">implementations</span></code> and <code class="docutils literal notranslate"><span class="pre">helpers</span></code> are fully documented and their API is generated automatically with sphinx-apidoc after each update:</p>
 <div class="toctree-wrapper compound">
@@ -264,18 +277,19 @@ Parts of the Python scripts are supported by tests and checked for PEP8 conformi
 <li class="toctree-l1"><a class="reference internal" href="pySDC/helpers.html">helpers package</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="indices-and-tables">
+</section>
+<section id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -312,7 +326,7 @@ Parts of the Python scripts are supported by tests and checked for PEP8 conformi
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -334,12 +348,13 @@ Parts of the Python scripts are supported by tests and checked for PEP8 conformi
         <li class="right" >
           <a href="tutorial/step_1.html" title="Step-1: A first spatial problem"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to pySDC!</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Robert Speck.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

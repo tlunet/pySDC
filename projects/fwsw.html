@@ -1,18 +1,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Fast-Wave-Slow-Wave SDC &#8212; pySDC 4.0 documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Fast-Wave-Slow-Wave SDC &#8212; pySDC 4.2.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +35,8 @@
         <li class="right" >
           <a href="node_failure.html" title="Fault-tolerance with PFASST: node failures"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Fast-Wave-Slow-Wave SDC</a></li> 
       </ul>
     </div>  
 
@@ -43,7 +45,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="fast-wave-slow-wave-sdc">
+  <section id="fast-wave-slow-wave-sdc">
 <h1>Fast-Wave-Slow-Wave SDC<a class="headerlink" href="#fast-wave-slow-wave-sdc" title="Permalink to this headline">¶</a></h1>
 <p>In this project, we explore semi-implicit spectral deferred corrections (SISDC) in which the stiff, fast dynamics correspond to fast propagating waves.
 We study the performance of the method compared to standard integrators like RK-IMEX or DIRK schemes and analyze the convergence properties for scalar test problems.
@@ -52,7 +54,7 @@ while the original code can be found under <a class="reference external" href="h
 Note that due to the long runtime, not all results are generated via CI.
 For the Boussinesq example and the convergence test of the acoustic-advection equation, only the visualization (and therefore the existence of the data files) is tested.
 We omit the codes in this documentation, since they are rather long and slightly complex.</p>
-<div class="section" id="theoretical-results">
+<section id="theoretical-results">
 <h2>Theoretical results<a class="headerlink" href="#theoretical-results" title="Permalink to this headline">¶</a></h2>
 <p>Here, we review FWSW-SDC from two different viewpoints: as a split method with a fixed order set by a fixed number of iterations K for a sufficiently large number of nodes M,
 or as an iterative solver for the collocation problem where iterations are performed until the norm of the residual reaches a prescribed tolerance.
@@ -71,8 +73,8 @@ We investigate fwsw-SDC from both viewpoints for the scalar test problem and ana
 <a class="reference internal image-reference" href="../_images/stab_vs_k_unresolved.png"><img alt="../_images/stab_vs_k_unresolved.png" src="../_images/stab_vs_k_unresolved.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/phase-K3-M3.png"><img alt="../_images/phase-K3-M3.png" src="../_images/phase-K3-M3.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/ampfactor-K3-M3.png"><img alt="../_images/ampfactor-K3-M3.png" src="../_images/ampfactor-K3-M3.png" style="width: 19%;" /></a>
-</div>
-<div class="section" id="acoustic-advection-example">
+</section>
+<section id="acoustic-advection-example">
 <h2>Acoustic-advection example<a class="headerlink" href="#acoustic-advection-example" title="Permalink to this headline">¶</a></h2>
 <p>In a first more complex example, we consider the 1D acoustic-advection example. We show:</p>
 <ul class="simple">
@@ -84,17 +86,18 @@ We investigate fwsw-SDC from both viewpoints for the scalar test problem and ana
 <a class="reference internal image-reference" href="../_images/convergence.png"><img alt="../_images/convergence.png" src="../_images/convergence.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/iteration.png"><img alt="../_images/iteration.png" src="../_images/iteration.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/multiscale-K2-M2.png"><img alt="../_images/multiscale-K2-M2.png" src="../_images/multiscale-K2-M2.png" style="width: 19%;" /></a>
-</div>
-<div class="section" id="boussinesq-example">
+</section>
+<section id="boussinesq-example">
 <h2>Boussinesq example<a class="headerlink" href="#boussinesq-example" title="Permalink to this headline">¶</a></h2>
 <p>In a second, even more complex example, we test FWSW-SDC for the 2D Boussinesq equation.
 In particular, we are interested in the number of <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/blob/master/pySDC/projects/FastWaveSlowWave/rungmrescounter_boussinesq.py">GMRES iterations</a> each time integrator needs to achieve a certain error.</p>
 <p>Results (generated with <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/blob/master/pySDC/projects/FastWaveSlowWave/plotgmrescounter_boussinesq.py">plotgmrescounter_boussinesq.py</a>):</p>
 <a class="reference internal image-reference" href="../_images/boussinesq.png"><img alt="../_images/boussinesq.png" src="../_images/boussinesq.png" style="width: 19%;" /></a>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -127,7 +130,7 @@ In particular, we are interested in the number of <a class="reference external" 
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -152,12 +155,13 @@ In particular, we are interested in the number of <a class="reference external" 
         <li class="right" >
           <a href="node_failure.html" title="Fault-tolerance with PFASST: node failures"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Fast-Wave-Slow-Wave SDC</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Robert Speck.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

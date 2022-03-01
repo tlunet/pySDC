@@ -1,18 +1,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Second-order Problems &#8212; pySDC 4.0 documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Second-order Problems &#8212; pySDC 4.2.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +35,8 @@
         <li class="right" >
           <a href="matrixPFASST.html" title="Matrix-based versions of PFASST"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Second-order Problems</a></li> 
       </ul>
     </div>  
 
@@ -43,11 +45,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="second-order-problems">
+  <section id="second-order-problems">
 <h1>Second-order Problems<a class="headerlink" href="#second-order-problems" title="Permalink to this headline">¶</a></h1>
 <p>In this project, we run several examples of the <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/blob/master/pySDC/implementations/sweeper_classes/verlet.py">second-order Verlet-SDC integrator</a>.
 This SDC variant is the core integrator for the <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/blob/master/pySDC/implementations/sweeper_classes/boris_2nd_order.py">Boris method</a>, which we use e.g. in the 3rd tutorial.</p>
-<div class="section" id="simple-problems">
+<section id="simple-problems">
 <h2>Simple problems<a class="headerlink" href="#simple-problems" title="Permalink to this headline">¶</a></h2>
 <p>We first test the integrator for some rather simple problems, namely the harmonic oscillator and the Henon-Heiles problem.
 For both problems we make use of the hook <code class="docutils literal notranslate"><span class="pre">hamiltonian_output</span></code> to monitor the deviation from the exact Hamiltonian.
@@ -277,7 +279,7 @@ PFASST is run with 100 processors (virtually parallel) and the deviation from th
     <span class="n">plt_helper</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pdf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PDF file&#39;</span>
-    <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pgf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PGF file&#39;</span>
+    <span class="c1"># assert os.path.isfile(fname + &#39;.pgf&#39;), &#39;ERROR: plotting did not create PGF file&#39;</span>
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PNG file&#39;</span>
 
 
@@ -297,8 +299,8 @@ PFASST is run with 100 processors (virtually parallel) and the deviation from th
 <p>Results:</p>
 <a class="reference internal image-reference" href="../_images/harmonic_hamiltonian.png"><img alt="../_images/harmonic_hamiltonian.png" src="../_images/harmonic_hamiltonian.png" style="width: 185.0px; height: 92.0px;" /></a>
 <a class="reference internal image-reference" href="../_images/henonheiles_hamiltonian.png"><img alt="../_images/henonheiles_hamiltonian.png" src="../_images/henonheiles_hamiltonian.png" style="width: 185.0px; height: 92.0px;" /></a>
-</div>
-<div class="section" id="solar-system-problem">
+</section>
+<section id="solar-system-problem">
 <h2>Solar system problem<a class="headerlink" href="#solar-system-problem" title="Permalink to this headline">¶</a></h2>
 <p>In this slightly more complex setup we simulate the movement of planets in the solar system.
 The acceleration due to gravitational forces are computed using a simple N^2 solver.
@@ -545,7 +547,7 @@ Here, over 15 iterations are required in the mean, while SDC and MLSDC require o
     <span class="n">plt_helper</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pdf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PDF file&#39;</span>
-    <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pgf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PGF file&#39;</span>
+    <span class="c1"># assert os.path.isfile(fname + &#39;.pgf&#39;), &#39;ERROR: plotting did not create PGF file&#39;</span>
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PNG file&#39;</span>
 
     <span class="c1"># extract positions and prepare for plotting</span>
@@ -578,7 +580,7 @@ Here, over 15 iterations are required in the mean, while SDC and MLSDC require o
     <span class="n">plt_helper</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pdf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PDF file&#39;</span>
-    <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pgf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PGF file&#39;</span>
+    <span class="c1"># assert os.path.isfile(fname + &#39;.pgf&#39;), &#39;ERROR: plotting did not create PGF file&#39;</span>
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PNG file&#39;</span>
 
 
@@ -612,10 +614,10 @@ Here, over 15 iterations are required in the mean, while SDC and MLSDC require o
    <span class="n">Std</span> <span class="ow">and</span> <span class="n">var</span> <span class="k">for</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span><span class="p">:</span> <span class="mf">6.37</span> <span class="o">--</span> <span class="mf">40.54</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../_images/full_solar_system_hamiltonian.png"><img alt="../_images/full_solar_system_hamiltonian.png" src="../_images/full_solar_system_hamiltonian.png" style="width: 376.0px; height: 584.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/full_solar_system_hamiltonian.png"><img alt="../_images/full_solar_system_hamiltonian.png" src="../_images/full_solar_system_hamiltonian.png" style="width: 376.0px; height: 526.0px;" /></a>
 <a class="reference internal image-reference" href="../_images/full_solar_system_positions.png"><img alt="../_images/full_solar_system_positions.png" src="../_images/full_solar_system_positions.png" style="width: 490.0px; height: 483.0px;" /></a>
-</div>
-<div class="section" id="fermi-pasta-ulam-tsingou-problem">
+</section>
+<section id="fermi-pasta-ulam-tsingou-problem">
 <h2>Fermi-Pasta-Ulam-Tsingou problem<a class="headerlink" href="#fermi-pasta-ulam-tsingou-problem" title="Permalink to this headline">¶</a></h2>
 <p>This is the famous FPUT problem, one of the first numerical simulation done in physics.
 The basis for this setup can be found <a class="reference external" href="http://www.scholarpedia.org/article/Fermi-Pasta-Ulam_nonlinear_lattice_oscillations">here</a> and we implement this in the <code class="docutils literal notranslate"><span class="pre">FermiPastaUlamTsingou</span></code> problem class.
@@ -807,7 +809,7 @@ Note that we run MLSDC here, since PFASST does not seem to converge easily.</p>
     <span class="n">plt_helper</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pdf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PDF file&#39;</span>
-    <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pgf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PGF file&#39;</span>
+    <span class="c1"># assert os.path.isfile(fname + &#39;.pgf&#39;), &#39;ERROR: plotting did not create PGF file&#39;</span>
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PNG file&#39;</span>
 
     <span class="c1"># ENERGY PLOTTING #</span>
@@ -831,7 +833,7 @@ Note that we run MLSDC here, since PFASST does not seem to converge easily.</p>
     <span class="n">plt_helper</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pdf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PDF file&#39;</span>
-    <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pgf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PGF file&#39;</span>
+    <span class="c1"># assert os.path.isfile(fname + &#39;.pgf&#39;), &#39;ERROR: plotting did not create PGF file&#39;</span>
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PNG file&#39;</span>
 
     <span class="c1"># POSITION PLOTTING #</span>
@@ -858,7 +860,7 @@ Note that we run MLSDC here, since PFASST does not seem to converge easily.</p>
     <span class="n">plt_helper</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pdf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PDF file&#39;</span>
-    <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pgf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PGF file&#39;</span>
+    <span class="c1"># assert os.path.isfile(fname + &#39;.pgf&#39;), &#39;ERROR: plotting did not create PGF file&#39;</span>
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PNG file&#39;</span>
 
 
@@ -877,17 +879,18 @@ Note that we run MLSDC here, since PFASST does not seem to converge easily.</p>
    <span class="n">Range</span> <span class="n">of</span> <span class="n">values</span> <span class="k">for</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span><span class="p">:</span>  <span class="mi">7</span> 
    <span class="n">Position</span> <span class="n">of</span> <span class="nb">max</span><span class="o">/</span><span class="nb">min</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span><span class="p">:</span> <span class="mi">475</span> <span class="o">--</span>  <span class="mi">0</span>
    <span class="n">Std</span> <span class="ow">and</span> <span class="n">var</span> <span class="k">for</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span><span class="p">:</span> <span class="mf">2.10</span> <span class="o">--</span> <span class="mf">4.42</span>
-<span class="o">...</span> <span class="n">took</span> <span class="mf">81.2157</span> <span class="n">seconds</span> <span class="n">to</span> <span class="n">run</span> <span class="n">this</span><span class="o">.</span>
+<span class="o">...</span> <span class="n">took</span> <span class="mf">59.6114</span> <span class="n">seconds</span> <span class="n">to</span> <span class="n">run</span> <span class="n">this</span><span class="o">.</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../_images/fput_hamiltonian.png"><img alt="../_images/fput_hamiltonian.png" src="../_images/fput_hamiltonian.png" style="width: 376.0px; height: 212.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/fput_hamiltonian.png"><img alt="../_images/fput_hamiltonian.png" src="../_images/fput_hamiltonian.png" style="width: 376.0px; height: 201.0px;" /></a>
 <a class="reference internal image-reference" href="../_images/fput_positions.png"><img alt="../_images/fput_positions.png" src="../_images/fput_positions.png" style="width: 271.0px; height: 167.0px;" /></a>
 <a class="reference internal image-reference" href="../_images/fput_energy.png"><img alt="../_images/fput_energy.png" src="../_images/fput_energy.png" style="width: 381.0px; height: 184.0px;" /></a>
 <a class="reference internal image-reference" href="../_images/fput_energy_full.png"><img alt="../_images/fput_energy_full.png" src="../_images/fput_energy_full.png" style="width: 347.0px; height: 181.0px;" /></a>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -920,7 +923,7 @@ Note that we run MLSDC here, since PFASST does not seem to converge easily.</p>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -945,12 +948,13 @@ Note that we run MLSDC here, since PFASST does not seem to converge easily.</p>
         <li class="right" >
           <a href="matrixPFASST.html" title="Matrix-based versions of PFASST"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Second-order Problems</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Robert Speck.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

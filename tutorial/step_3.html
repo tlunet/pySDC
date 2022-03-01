@@ -1,18 +1,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Step-3: Statistics and a new sweeper &#8212; pySDC 4.0 documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Step-3: Statistics and a new sweeper &#8212; pySDC 4.2.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +35,8 @@
         <li class="right" >
           <a href="step_2.html" title="Step-2: Data structures and my first sweeper"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Step-3: Statistics and a new sweeper</a></li> 
       </ul>
     </div>  
 
@@ -43,12 +45,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="step-3-statistics-and-a-new-sweeper">
+  <section id="step-3-statistics-and-a-new-sweeper">
 <h1>Step-3: Statistics and a new sweeper<a class="headerlink" href="#step-3-statistics-and-a-new-sweeper" title="Permalink to this headline">¶</a></h1>
 <p>In this step, we will show how to work with the statistics pySDC
 generates. We will also introduce a new problem as well as a new
 sweeper.</p>
-<div class="section" id="part-a-getting-statistics">
+<section id="part-a-getting-statistics">
 <h2>Part A: Getting statistics<a class="headerlink" href="#part-a-getting-statistics" title="Permalink to this headline">¶</a></h2>
 <p>In the first part, we run our standard heat equation problem again, but
 focus on the <code class="docutils literal notranslate"><span class="pre">stats</span></code> dictionary the controller returns in addition to
@@ -63,7 +65,7 @@ all residuals logged during time 0.1 (i.e. for all iterations in the
 first time step). Analogously, we could ask for all residuals at the
 final iteration of each step by calling
 <code class="docutils literal notranslate"><span class="pre">filter_stats(stats,</span> <span class="pre">iter=-1,</span> <span class="pre">type='residual')</span></code>. The second helper
-routine converts the filtered or non-filtered dictionary to a listof
+routine converts the filtered or non-filtered dictionary to a list of
 tuples, where the first part is the item defined by the parameter
 <code class="docutils literal notranslate"><span class="pre">sortby</span></code> and the second part is the value. Here, we would like to have
 a list of iterations and residuals to see how SDC converged over the
@@ -194,13 +196,13 @@ users register their own types, see below.</p></li>
 <span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span>  <span class="mi">3</span><span class="p">:</span> <span class="mf">8.8038e-05</span>
 <span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span>  <span class="mi">4</span><span class="p">:</span> <span class="mf">1.2171e-05</span>
 <span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span>  <span class="mi">5</span><span class="p">:</span> <span class="mf">1.3827e-06</span>
-<span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span>  <span class="mi">6</span><span class="p">:</span> <span class="mf">6.3645e-07</span>
+<span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span>  <span class="mi">6</span><span class="p">:</span> <span class="mf">6.3644e-07</span>
 <span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span>  <span class="mi">7</span><span class="p">:</span> <span class="mf">1.6895e-07</span>
 <span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span>  <span class="mi">8</span><span class="p">:</span> <span class="mf">3.5259e-08</span>
-<span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span>  <span class="mi">9</span><span class="p">:</span> <span class="mf">6.0736e-09</span>
-<span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span> <span class="mi">10</span><span class="p">:</span> <span class="mf">8.2713e-10</span>
-<span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span> <span class="mi">11</span><span class="p">:</span> <span class="mf">1.1881e-10</span>
-<span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span> <span class="mi">12</span><span class="p">:</span> <span class="mf">1.4868e-11</span>
+<span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span>  <span class="mi">9</span><span class="p">:</span> <span class="mf">6.0719e-09</span>
+<span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span> <span class="mi">10</span><span class="p">:</span> <span class="mf">8.2749e-10</span>
+<span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span> <span class="mi">11</span><span class="p">:</span> <span class="mf">1.2094e-10</span>
+<span class="n">Residual</span> <span class="ow">in</span> <span class="n">iteration</span> <span class="mi">12</span><span class="p">:</span> <span class="mf">1.5037e-11</span>
 <span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="n">at</span> <span class="n">time</span> <span class="mf">0.10</span><span class="p">:</span> <span class="mi">12</span>
 <span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="n">at</span> <span class="n">time</span> <span class="mf">0.20</span><span class="p">:</span> <span class="mi">12</span>
 <span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="n">at</span> <span class="n">time</span> <span class="mf">0.30</span><span class="p">:</span> <span class="mi">12</span>
@@ -211,8 +213,8 @@ users register their own types, see below.</p></li>
 <span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="n">at</span> <span class="n">time</span> <span class="mf">0.80</span><span class="p">:</span> <span class="mi">12</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="part-b-adding-statistics">
+</section>
+<section id="part-b-adding-statistics">
 <h2>Part B: Adding statistics<a class="headerlink" href="#part-b-adding-statistics" title="Permalink to this headline">¶</a></h2>
 <p>We now extend the statistics of pySDC by user-defined entries. To make
 things much more interesting (and complicated), we introduce a new
@@ -292,7 +294,7 @@ using the level.</p></li>
     <span class="n">problem_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;omega_E&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.9</span>  <span class="c1"># E-field frequency</span>
     <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;omega_B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">25.0</span>  <span class="c1"># B-field frequency</span>
-    <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;u0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]])</span>  <span class="c1"># initial center of positions</span>
+    <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;u0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>  <span class="c1"># initial center of positions</span>
     <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;nparts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># number of particles in the trap</span>
     <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;sig&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># smoothing parameter for the forces</span>
 
@@ -341,8 +343,8 @@ using the level.</p></li>
 </pre></div>
 </div>
 <p>Results:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>2021-08-12 09:07:48,515 - controller - Controller - dump_setup - 109 - INFO: Setup overview (--&gt; user-defined) -- BEGIN
-2021-08-12 09:07:48,516 - controller - Controller - dump_setup - 172 - INFO: ----------------------------------------------------------------------------------------------------
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>2022-03-01 17:49:45,607 - controller - Controller - dump_setup - 109 - INFO: Setup overview (--&gt; user-defined) -- BEGIN
+2022-03-01 17:49:45,607 - controller - Controller - dump_setup - 172 - INFO: ----------------------------------------------------------------------------------------------------
 
 Controller: &lt;class &#39;pySDC.implementations.controller_classes.controller_nonMPI.controller_nonMPI&#39;&gt;
     mssdc_jac = True
@@ -377,26 +379,26 @@ Step: &lt;class &#39;pySDC.core.Step.step&#39;&gt;
 --&gt;                 num_nodes = 3
 --&gt;                 Collocation: &lt;class &#39;pySDC.implementations.collocation_classes.gauss_radau_right.CollGaussRadau_Right&#39;&gt;
 
-2021-08-12 09:07:48,516 - controller - Controller - dump_setup - 174 - INFO: ----------------------------------------------------------------------------------------------------
-2021-08-12 09:07:48,516 - controller - Controller - dump_setup - 176 - INFO: Setup overview (--&gt; user-defined) -- END
+2022-03-01 17:49:45,607 - controller - Controller - dump_setup - 174 - INFO: ----------------------------------------------------------------------------------------------------
+2022-03-01 17:49:45,607 - controller - Controller - dump_setup - 176 - INFO: Setup overview (--&gt; user-defined) -- END
 
-2021-08-12 09:07:49,422 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  1 -- Sweep:  1 -- residual: 3.53203678e+00
-2021-08-12 09:07:49,431 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  2 -- Sweep:  1 -- residual: 2.09852117e-01
-2021-08-12 09:07:49,441 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  3 -- Sweep:  1 -- residual: 3.50301513e-02
-2021-08-12 09:07:49,451 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  4 -- Sweep:  1 -- residual: 4.67724741e-03
-2021-08-12 09:07:49,460 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  5 -- Sweep:  1 -- residual: 7.95583202e-04
-2021-08-12 09:07:49,475 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  6 -- Sweep:  1 -- residual: 1.11405073e-04
-2021-08-12 09:07:49,485 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  7 -- Sweep:  1 -- residual: 1.26902403e-05
-2021-08-12 09:07:49,495 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  8 -- Sweep:  1 -- residual: 1.16534544e-06
-2021-08-12 09:07:49,504 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  9 -- Sweep:  1 -- residual: 1.66968007e-07
-2021-08-12 09:07:49,514 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration: 10 -- Sweep:  1 -- residual: 2.09407602e-08
-2021-08-12 09:07:49,524 - hooks - Hooks - post_sweep - 200 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration: 11 -- Sweep:  1 -- residual: 2.17124807e-09
+2022-03-01 17:49:46,620 - hooks - Hooks - post_sweep - 197 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  1 -- Sweep:  1 -- residual: 3.53203678e+00
+2022-03-01 17:49:46,627 - hooks - Hooks - post_sweep - 197 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  2 -- Sweep:  1 -- residual: 2.09852117e-01
+2022-03-01 17:49:46,635 - hooks - Hooks - post_sweep - 197 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  3 -- Sweep:  1 -- residual: 3.50301513e-02
+2022-03-01 17:49:46,642 - hooks - Hooks - post_sweep - 197 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  4 -- Sweep:  1 -- residual: 4.67724741e-03
+2022-03-01 17:49:46,649 - hooks - Hooks - post_sweep - 197 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  5 -- Sweep:  1 -- residual: 7.95583202e-04
+2022-03-01 17:49:46,656 - hooks - Hooks - post_sweep - 197 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  6 -- Sweep:  1 -- residual: 1.11405073e-04
+2022-03-01 17:49:46,663 - hooks - Hooks - post_sweep - 197 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  7 -- Sweep:  1 -- residual: 1.26902403e-05
+2022-03-01 17:49:46,671 - hooks - Hooks - post_sweep - 197 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  8 -- Sweep:  1 -- residual: 1.16534544e-06
+2022-03-01 17:49:46,678 - hooks - Hooks - post_sweep - 197 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration:  9 -- Sweep:  1 -- residual: 1.66968007e-07
+2022-03-01 17:49:46,685 - hooks - Hooks - post_sweep - 197 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration: 10 -- Sweep:  1 -- residual: 2.09407744e-08
+2022-03-01 17:49:46,692 - hooks - Hooks - post_sweep - 197 - INFO: Process  0 on time 0.000000 at stage         IT_FINE: Level: 0 -- Iteration: 11 -- Sweep:  1 -- residual: 2.17121965e-09
 Total energy and deviation in iteration  0: 8799.5000000000 -- 0.00000000e+00
 Total energy and deviation in iteration 11: 8785.0038936088 -- 1.44961064e+01
 </pre></div>
 </div>
-</div>
-<div class="section" id="part-c-studying-collocation-node-types">
+</section>
+<section id="part-c-studying-collocation-node-types">
 <h2>Part C: Studying collocation node types<a class="headerlink" href="#part-c-studying-collocation-node-types" title="Permalink to this headline">¶</a></h2>
 <p>Having first experience with the Boris-SDC solver, we see that the
 energy deviates quite a bit already for this simple setup. We now test
@@ -479,7 +481,7 @@ the relevant information can be stored.</p></li>
     <span class="n">problem_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;omega_E&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.9</span>
     <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;omega_B&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">25.0</span>
-    <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;u0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;u0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
     <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;nparts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">problem_params</span><span class="p">[</span><span class="s1">&#39;sig&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
 
@@ -533,14 +535,15 @@ the relevant information can be stored.</p></li>
 </div>
 <p>Results:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Energy</span> <span class="n">deviation</span> <span class="k">for</span> <span class="n">CollGaussRadau_Right</span><span class="p">:</span> <span class="mf">1.44960920e+01</span>
-<span class="n">Energy</span> <span class="n">deviation</span> <span class="k">for</span> <span class="n">CollGaussLegendre</span><span class="p">:</span> <span class="mf">2.33862993e-05</span>
+<span class="n">Energy</span> <span class="n">deviation</span> <span class="k">for</span> <span class="n">CollGaussLegendre</span><span class="p">:</span> <span class="mf">2.33862975e-05</span>
 <span class="n">Energy</span> <span class="n">deviation</span> <span class="k">for</span> <span class="n">CollGaussLobatto</span><span class="p">:</span> <span class="mf">9.32710282e-06</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -573,7 +576,7 @@ the relevant information can be stored.</p></li>
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -598,12 +601,13 @@ the relevant information can be stored.</p></li>
         <li class="right" >
           <a href="step_2.html" title="Step-2: Data structures and my first sweeper"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Step-3: Statistics and a new sweeper</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Robert Speck.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

@@ -1,18 +1,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>What is the fastest SDC variant? &#8212; pySDC 4.0 documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>What is the fastest SDC variant? &#8212; pySDC 4.2.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +35,8 @@
         <li class="right" >
           <a href="Hamiltonian.html" title="Second-order Problems"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What is the fastest SDC variant?</a></li> 
       </ul>
     </div>  
 
@@ -43,12 +45,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="what-is-the-fastest-sdc-variant">
+  <section id="what-is-the-fastest-sdc-variant">
 <h1>What is the fastest SDC variant?<a class="headerlink" href="#what-is-the-fastest-sdc-variant" title="Permalink to this headline">¶</a></h1>
 <p>In this project, we test different variants of SDC for a particular problem to see which one is the fastest.
 More precisely, we run SDC for the 1D Fisher equation and the 2D Gray-Scott problem with PETSc data types and solvers, using fully implicit, semi-implicit and multi-implicit time-stepping.
 We also test exact spatial solves vs. inexact ones (aka inexact SDC, ISDC)</p>
-<div class="section" id="fisher-and-gray-scott-equations">
+<section id="fisher-and-gray-scott-equations">
 <h2>Fisher and Gray-Scott equations<a class="headerlink" href="#fisher-and-gray-scott-equations" title="Permalink to this headline">¶</a></h2>
 <p>The two run scripts simply test all variants of SDC after the other, each of them exact and then inexact.
 The results are gathered, stored and shown in comparison.
@@ -252,7 +254,7 @@ Note that on standard machines the inexact semi-implicit variant wins each time 
     <span class="n">plt_helper</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pdf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PDF file&#39;</span>
-    <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pgf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PGF file&#39;</span>
+    <span class="c1"># assert os.path.isfile(fname + &#39;.pgf&#39;), &#39;ERROR: plotting did not create PGF file&#39;</span>
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PNG file&#39;</span>
 
     <span class="k">return</span> <span class="kc">None</span>
@@ -496,7 +498,7 @@ Note that on standard machines the inexact semi-implicit variant wins each time 
     <span class="n">plt_helper</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pdf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PDF file&#39;</span>
-    <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.pgf&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PGF file&#39;</span>
+    <span class="c1"># assert os.path.isfile(fname + &#39;.pgf&#39;), &#39;ERROR: plotting did not create PGF file&#39;</span>
     <span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&#39;.png&#39;</span><span class="p">),</span> <span class="s1">&#39;ERROR: plotting did not create PNG file&#39;</span>
 
     <span class="k">return</span> <span class="kc">None</span>
@@ -596,10 +598,11 @@ Note that on standard machines the inexact semi-implicit variant wins each time 
 </div>
 <p>Results:</p>
 <a class="reference internal image-reference" href="../_images/timings_SDC_variants_GrayScott.png"><img alt="../_images/timings_SDC_variants_GrayScott.png" src="../_images/timings_SDC_variants_GrayScott.png" style="width: 293.0px; height: 243.0px;" /></a>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -630,7 +633,7 @@ Note that on standard machines the inexact semi-implicit variant wins each time 
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -655,12 +658,13 @@ Note that on standard machines the inexact semi-implicit variant wins each time 
         <li class="right" >
           <a href="Hamiltonian.html" title="Second-order Problems"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What is the fastest SDC variant?</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Robert Speck.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

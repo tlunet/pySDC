@@ -1,18 +1,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Step-8: Advanced topics &#8212; pySDC 4.0 documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Step-8: Advanced topics &#8212; pySDC 4.2.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +35,8 @@
         <li class="right" >
           <a href="step_7.html" title="Step-7: pySDC with external libraries"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Step-8: Advanced topics</a></li> 
       </ul>
     </div>  
 
@@ -43,11 +45,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="step-8-advanced-topics">
+  <section id="step-8-advanced-topics">
 <h1>Step-8: Advanced topics<a class="headerlink" href="#step-8-advanced-topics" title="Permalink to this headline">¶</a></h1>
 <p>Since we now have explored the basic features of pySDC, we are actually ready to do some serious science (e.g. in the projects).
 However, we gather here further interesting cases, e.g. special flags or more alternative implementations of components.</p>
-<div class="section" id="part-a-visualizing-residuals">
+<section id="part-a-visualizing-residuals">
 <h2>Part A: Visualizing Residuals<a class="headerlink" href="#part-a-visualizing-residuals" title="Permalink to this headline">¶</a></h2>
 <p>In this part, we briefly introduce the visualization of residuals, built in into pySDC’s plugins.
 The application is (supposed) to be simple: merely put the <code class="docutils literal notranslate"><span class="pre">stats</span></code> object into the function <code class="docutils literal notranslate"><span class="pre">show_residual_across_simulation</span></code> and look at the resulting figure.</p>
@@ -134,9 +136,9 @@ The application is (supposed) to be simple: merely put the <code class="docutils
 <span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="k">for</span> <span class="n">time</span> <span class="mf">0.88</span><span class="p">:</span> <span class="mi">8</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../_images/step_8_residuals.png"><img alt="../_images/step_8_residuals.png" src="../_images/step_8_residuals.png" style="width: 603.5px; height: 434.5px;" /></a>
-</div>
-<div class="section" id="part-b-multi-step-sdc">
+<a class="reference internal image-reference" href="../_images/step_8_residuals.png"><img alt="../_images/step_8_residuals.png" src="../_images/step_8_residuals.png" style="width: 590.5px; height: 434.5px;" /></a>
+</section>
+<section id="part-b-multi-step-sdc">
 <h2>Part B: Multi-step SDC<a class="headerlink" href="#part-b-multi-step-sdc" title="Permalink to this headline">¶</a></h2>
 <p>One interesting question when playing around with the different configurations is this: what happens, if we want parallel time-steps but only a single level?
 The result is called multi-step SDC. Here, after each sweep the result is sent forward, but is picked up in the next (and not current) iteration.
@@ -146,7 +148,7 @@ Yet, the missing stabilization of the coarse level leads to a significant increa
 To prevent this, information can be sent forward immediately, but then this is not a parallel algorithm anymore..</p>
 <p>Important things to note:</p>
 <ul class="simple">
-<li><p>Use the controller parameter <code class="docutils literal notranslate"><span class="pre">mssdc_jac</span></code> to controll whether the method should be “parallel” (Jacobi-like) or “serial” (Gauss-like).</p></li>
+<li><p>Use the controller parameter <code class="docutils literal notranslate"><span class="pre">mssdc_jac</span></code> to control whether the method should be “parallel” (Jacobi-like) or “serial” (Gauss-like).</p></li>
 <li><p>We increased the logging value here again, (safely) ignoring the warnings for multi-step SDC.</p></li>
 </ul>
 <p>Full code: <a class="reference external" href="https://github.com/Parallel-in-Time/pySDC/blob/master/pySDC/tutorial/step_8/B_multistep_SDC.py">pySDC/tutorial/step_8/B_multistep_SDC.py</a></p>
@@ -312,12 +314,12 @@ To prevent this, information can be sent forward immediately, but then this is n
 </pre></div>
 </div>
 <p>Results:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="n">PFASST</span><span class="p">:</span> <span class="mf">2.87344391e-07</span>
-<span class="n">Error</span> <span class="n">parallel</span> <span class="n">MSSDC</span><span class="p">:</span> <span class="mf">2.87650037e-07</span>
-<span class="n">Error</span> <span class="n">serial</span> <span class="n">MSSDC</span><span class="p">:</span> <span class="mf">2.87540078e-07</span>
-<span class="n">Diff</span> <span class="n">PFASST</span> <span class="n">vs</span><span class="o">.</span> <span class="n">parallel</span> <span class="n">MSSDC</span><span class="p">:</span> <span class="mf">3.05646529e-10</span>
-<span class="n">Diff</span> <span class="n">PFASST</span> <span class="n">vs</span><span class="o">.</span> <span class="n">serial</span> <span class="n">MSSDC</span><span class="p">:</span> <span class="mf">1.95687317e-10</span>
-<span class="n">Diff</span> <span class="n">parallel</span> <span class="n">vs</span><span class="o">.</span> <span class="n">serial</span> <span class="n">MSSDC</span><span class="p">:</span> <span class="mf">1.09959212e-10</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="n">PFASST</span><span class="p">:</span> <span class="mf">2.87344394e-07</span>
+<span class="n">Error</span> <span class="n">parallel</span> <span class="n">MSSDC</span><span class="p">:</span> <span class="mf">2.87650041e-07</span>
+<span class="n">Error</span> <span class="n">serial</span> <span class="n">MSSDC</span><span class="p">:</span> <span class="mf">2.87540082e-07</span>
+<span class="n">Diff</span> <span class="n">PFASST</span> <span class="n">vs</span><span class="o">.</span> <span class="n">parallel</span> <span class="n">MSSDC</span><span class="p">:</span> <span class="mf">3.05646553e-10</span>
+<span class="n">Diff</span> <span class="n">PFASST</span> <span class="n">vs</span><span class="o">.</span> <span class="n">serial</span> <span class="n">MSSDC</span><span class="p">:</span> <span class="mf">1.95687314e-10</span>
+<span class="n">Diff</span> <span class="n">parallel</span> <span class="n">vs</span><span class="o">.</span> <span class="n">serial</span> <span class="n">MSSDC</span><span class="p">:</span> <span class="mf">1.09959240e-10</span>
 <span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="k">for</span> <span class="n">time</span> <span class="mf">0.00</span> <span class="p">(</span><span class="n">PFASST</span><span class="o">/</span><span class="n">parMSSDC</span><span class="o">/</span><span class="n">serMSSDC</span><span class="p">):</span>  <span class="mi">5</span> <span class="o">/</span>  <span class="mi">8</span> <span class="o">/</span>  <span class="mi">8</span>
 <span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="k">for</span> <span class="n">time</span> <span class="mf">0.12</span> <span class="p">(</span><span class="n">PFASST</span><span class="o">/</span><span class="n">parMSSDC</span><span class="o">/</span><span class="n">serMSSDC</span><span class="p">):</span>  <span class="mi">5</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">/</span>  <span class="mi">9</span>
 <span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="k">for</span> <span class="n">time</span> <span class="mf">0.25</span> <span class="p">(</span><span class="n">PFASST</span><span class="o">/</span><span class="n">parMSSDC</span><span class="o">/</span><span class="n">serMSSDC</span><span class="p">):</span>  <span class="mi">6</span> <span class="o">/</span> <span class="mi">11</span> <span class="o">/</span>  <span class="mi">9</span>
@@ -328,10 +330,10 @@ To prevent this, information can be sent forward immediately, but then this is n
 <span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="k">for</span> <span class="n">time</span> <span class="mf">0.88</span> <span class="p">(</span><span class="n">PFASST</span><span class="o">/</span><span class="n">parMSSDC</span><span class="o">/</span><span class="n">serMSSDC</span><span class="p">):</span>  <span class="mi">8</span> <span class="o">/</span> <span class="mi">18</span> <span class="o">/</span> <span class="mi">11</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../_images/step_8_residuals_mssdc_jac.png"><img alt="../_images/step_8_residuals_mssdc_jac.png" src="../_images/step_8_residuals_mssdc_jac.png" style="width: 595.5px; height: 434.5px;" /></a>
+<a class="reference internal image-reference" href="../_images/step_8_residuals_mssdc_jac.png"><img alt="../_images/step_8_residuals_mssdc_jac.png" src="../_images/step_8_residuals_mssdc_jac.png" style="width: 590.5px; height: 434.5px;" /></a>
 <a class="reference internal image-reference" href="../_images/step_8_residuals_mssdc_gs.png"><img alt="../_images/step_8_residuals_mssdc_gs.png" src="../_images/step_8_residuals_mssdc_gs.png" style="width: 590.5px; height: 434.5px;" /></a>
-</div>
-<div class="section" id="part-c-iteration-estimator">
+</section>
+<section id="part-c-iteration-estimator">
 <h2>Part C: Iteration estimator<a class="headerlink" href="#part-c-iteration-estimator" title="Permalink to this headline">¶</a></h2>
 <p>One may ask when to stop the SDC, MLSDC, PFASST iterations. So far, we have used a residual threshold or a fixed number of iterations to stop the process.
 Another option is to estimate the number of iterations it takes to reach a given error w.r.t. the exact collocation solution.
@@ -560,7 +562,7 @@ This example takes three different test cases and checks how well the iteration 
                 <span class="n">dt</span> <span class="o">=</span> <span class="p">(</span><span class="n">Tend</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">/</span> <span class="n">nsteps</span>
                 <span class="n">description</span><span class="p">,</span> <span class="n">controller_params</span> <span class="o">=</span> <span class="n">setup_auzinger</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">ml</span><span class="p">)</span>
 
-            <span class="n">out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Running </span><span class="si">{type}</span><span class="s1"> in </span><span class="si">{ndim}</span><span class="s1"> dimensions with time-step size </span><span class="si">{dt}</span><span class="s1">...</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Running </span><span class="si">{</span><span class="nb">type</span><span class="si">}</span><span class="s1"> in </span><span class="si">{</span><span class="n">ndim</span><span class="si">}</span><span class="s1"> dimensions with time-step size </span><span class="si">{</span><span class="n">dt</span><span class="si">}</span><span class="s1">...</span><span class="se">\n</span><span class="s1">&#39;</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">out</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 
@@ -583,7 +585,7 @@ This example takes three different test cases and checks how well the iteration 
             <span class="n">iter_counts</span> <span class="o">=</span> <span class="n">sort_stats</span><span class="p">(</span><span class="n">filter_stats</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;niter&#39;</span><span class="p">),</span> <span class="n">sortby</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
 
             <span class="n">niters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iter_counts</span><span class="p">])</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;   Mean number of iterations: {np.mean(niters):4.2f}&#39;</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;   Mean number of iterations: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">niters</span><span class="p">)</span><span class="si">:</span><span class="s1">4.2f</span><span class="si">}</span><span class="s1">&#39;</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">out</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 
@@ -591,9 +593,9 @@ This example takes three different test cases and checks how well the iteration 
             <span class="n">PDE_errors</span> <span class="o">=</span> <span class="n">sort_stats</span><span class="p">(</span><span class="n">filter_stats</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;PDE_error_after_step&#39;</span><span class="p">),</span> <span class="n">sortby</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
             <span class="n">coll_errors</span> <span class="o">=</span> <span class="n">sort_stats</span><span class="p">(</span><span class="n">filter_stats</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;coll_error_after_step&#39;</span><span class="p">),</span> <span class="n">sortby</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">iters</span><span class="p">,</span> <span class="n">PDE_err</span><span class="p">,</span> <span class="n">coll_err</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">iter_counts</span><span class="p">,</span> <span class="n">PDE_errors</span><span class="p">,</span> <span class="n">coll_errors</span><span class="p">):</span>
-                <span class="k">assert</span> <span class="n">coll_err</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;step_params&#39;</span><span class="p">][</span><span class="s1">&#39;errtol&#39;</span><span class="p">],</span> <span class="sa">f</span><span class="s1">&#39;Error too high, got </span><span class="si">{coll_err[1]:8.4e}</span><span class="s1">&#39;</span>
-                <span class="n">out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;   Errors after step </span><span class="si">{PDE_err[0]:8.4f}</span><span class="s1"> with </span><span class="si">{iters[1]}</span><span class="s1"> iterations: &#39;</span> \
-                      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{PDE_err[1]:8.4e}</span><span class="s1"> / </span><span class="si">{coll_err[1]:8.4e}</span><span class="s1">&#39;</span>
+                <span class="k">assert</span> <span class="n">coll_err</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;step_params&#39;</span><span class="p">][</span><span class="s1">&#39;errtol&#39;</span><span class="p">],</span> <span class="sa">f</span><span class="s1">&#39;Error too high, got </span><span class="si">{</span><span class="n">coll_err</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">8.4e</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;   Errors after step </span><span class="si">{</span><span class="n">PDE_err</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">8.4f</span><span class="si">}</span><span class="s1"> with </span><span class="si">{</span><span class="n">iters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> iterations: &#39;</span> \
+                      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">PDE_err</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">8.4e</span><span class="si">}</span><span class="s1"> / </span><span class="si">{</span><span class="n">coll_err</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">8.4e</span><span class="si">}</span><span class="s1">&#39;</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">out</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -601,7 +603,7 @@ This example takes three different test cases and checks how well the iteration 
 
             <span class="c1"># filter statistics by type (error after time-step)</span>
             <span class="n">timing</span> <span class="o">=</span> <span class="n">sort_stats</span><span class="p">(</span><span class="n">filter_stats</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;timing_run&#39;</span><span class="p">),</span> <span class="n">sortby</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;...done, took </span><span class="si">{timing[0][1]}</span><span class="s1"> seconds!&#39;</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;...done, took </span><span class="si">{</span><span class="n">timing</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> seconds!&#39;</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">out</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 
@@ -632,30 +634,30 @@ This example takes three different test cases and checks how well the iteration 
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Running diffusion in 1 dimensions with time-step size 0.125...
 
    Mean number of iterations: 5.75
-   Errors after step   0.1250 with 5 iterations: 1.7804e-08 / 8.6496e-09
+   Errors after step   0.1250 with 5 iterations: 1.7804e-08 / 8.6490e-09
    Errors after step   0.2500 with 5 iterations: 4.9619e-08 / 2.9864e-08
-   Errors after step   0.3750 with 6 iterations: 4.2300e-08 / 3.5300e-09
-   Errors after step   0.5000 with 6 iterations: 3.8684e-08 / 4.9219e-09
-   Errors after step   0.6250 with 6 iterations: 3.7128e-08 / 6.2371e-09
-   Errors after step   0.7500 with 6 iterations: 3.6619e-08 / 7.4550e-09
-   Errors after step   0.8750 with 6 iterations: 3.6530e-08 / 8.5566e-09
-   Errors after step   1.0000 with 6 iterations: 3.6478e-08 / 9.5246e-09
+   Errors after step   0.3750 with 6 iterations: 4.2300e-08 / 3.5301e-09
+   Errors after step   0.5000 with 6 iterations: 3.8684e-08 / 4.9220e-09
+   Errors after step   0.6250 with 6 iterations: 3.7128e-08 / 6.2374e-09
+   Errors after step   0.7500 with 6 iterations: 3.6619e-08 / 7.4551e-09
+   Errors after step   0.8750 with 6 iterations: 3.6531e-08 / 8.5568e-09
+   Errors after step   1.0000 with 6 iterations: 3.6479e-08 / 9.5249e-09
 
-...done, took 2.0999820232391357 seconds!
+...done, took 1.5032690359998924 seconds!
 -----------------------------------------------------------------------------
 Running diffusion in 1 dimensions with time-step size 0.125...
 
    Mean number of iterations: 3.00
-   Errors after step   0.1250 with 3 iterations: 9.8193e-09 / 6.6457e-10
-   Errors after step   0.2500 with 3 iterations: 1.7173e-08 / 2.2931e-09
-   Errors after step   0.3750 with 3 iterations: 2.2849e-08 / 3.8867e-09
-   Errors after step   0.5000 with 3 iterations: 2.7307e-08 / 5.4194e-09
-   Errors after step   0.6250 with 3 iterations: 3.0813e-08 / 6.8675e-09
-   Errors after step   0.7500 with 3 iterations: 3.3516e-08 / 8.2083e-09
-   Errors after step   0.8750 with 3 iterations: 3.5501e-08 / 9.4213e-09
+   Errors after step   0.1250 with 3 iterations: 9.8187e-09 / 6.6399e-10
+   Errors after step   0.2500 with 3 iterations: 1.7174e-08 / 2.2934e-09
+   Errors after step   0.3750 with 3 iterations: 2.2849e-08 / 3.8865e-09
+   Errors after step   0.5000 with 3 iterations: 2.7307e-08 / 5.4191e-09
+   Errors after step   0.6250 with 3 iterations: 3.0812e-08 / 6.8671e-09
+   Errors after step   0.7500 with 3 iterations: 3.3516e-08 / 8.2082e-09
+   Errors after step   0.8750 with 3 iterations: 3.5501e-08 / 9.4211e-09
    Errors after step   1.0000 with 3 iterations: 3.6812e-08 / 1.0487e-08
 
-...done, took 4.8890135288238525 seconds!
+...done, took 3.619718047999868 seconds!
 -----------------------------------------------------------------------------
 Running advection in 1 dimensions with time-step size 0.125...
 
@@ -669,7 +671,7 @@ Running advection in 1 dimensions with time-step size 0.125...
    Errors after step   0.8750 with 4 iterations: 2.5517e-08 / 3.1527e-09
    Errors after step   1.0000 with 4 iterations: 2.9147e-08 / 3.1529e-09
 
-...done, took 0.40013670921325684 seconds!
+...done, took 0.29982498799995483 seconds!
 -----------------------------------------------------------------------------
 Running advection in 1 dimensions with time-step size 0.125...
 
@@ -683,7 +685,7 @@ Running advection in 1 dimensions with time-step size 0.125...
    Errors after step   0.8750 with 2 iterations: 2.5987e-08 / 3.2768e-09
    Errors after step   1.0000 with 2 iterations: 2.9666e-08 / 3.2704e-09
 
-...done, took 0.9466350078582764 seconds!
+...done, took 0.8135833209998964 seconds!
 -----------------------------------------------------------------------------
 Running auzinger in 1 dimensions with time-step size 0.125...
 
@@ -697,7 +699,7 @@ Running auzinger in 1 dimensions with time-step size 0.125...
    Errors after step   0.8750 with 6 iterations: 2.8266e-08 / 3.9548e-09
    Errors after step   1.0000 with 6 iterations: 2.8338e-08 / 5.5334e-09
 
-...done, took 0.7994523048400879 seconds!
+...done, took 0.5682259580000846 seconds!
 -----------------------------------------------------------------------------
 Running auzinger in 1 dimensions with time-step size 0.125...
 
@@ -711,18 +713,19 @@ Running auzinger in 1 dimensions with time-step size 0.125...
    Errors after step   0.8750 with 4 iterations: 3.1486e-08 / 2.3830e-10
    Errors after step   1.0000 with 4 iterations: 3.3802e-08 / 3.3903e-10
 
-...done, took 1.4826834201812744 seconds!
+...done, took 1.081980491999957 seconds!
 -----------------------------------------------------------------------------
 </pre></div>
 </div>
-</div>
-<div class="section" id="part-x-to-be-continued">
+</section>
+<section id="part-x-to-be-continued">
 <h2>Part X: To be continued…<a class="headerlink" href="#part-x-to-be-continued" title="Permalink to this headline">¶</a></h2>
 <p>We shall see what comes next…</p>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -756,7 +759,7 @@ Running auzinger in 1 dimensions with time-step size 0.125...
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -781,12 +784,13 @@ Running auzinger in 1 dimensions with time-step size 0.125...
         <li class="right" >
           <a href="step_7.html" title="Step-7: pySDC with external libraries"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Step-8: Advanced topics</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Robert Speck.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

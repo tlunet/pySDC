@@ -1,18 +1,19 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Fault-tolerance with PFASST: node failures &#8212; pySDC 4.0 documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Fault-tolerance with PFASST: node failures &#8212; pySDC 4.2.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -34,7 +35,8 @@
         <li class="right" >
           <a href="parallelSDC.html" title="Attempts to parallelize SDC"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Fault-tolerance with PFASST: node failures</a></li> 
       </ul>
     </div>  
 
@@ -43,7 +45,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="fault-tolerance-with-pfasst-node-failures">
+  <section id="fault-tolerance-with-pfasst-node-failures">
 <h1>Fault-tolerance with PFASST: node failures<a class="headerlink" href="#fault-tolerance-with-pfasst-node-failures" title="Permalink to this headline">¶</a></h1>
 <p>In this project, we explore PFASST’s potential to deal with node failures.
 We derive different strategies which allow PFASST to continue after one time-step has failed.
@@ -52,7 +54,7 @@ We test our ideas for two simple toy problems and two more complex show cases.
 This project contains the code for the publication <a class="reference external" href="https://arxiv.org/abs/1510.08334">Toward fault-tolerant parallel-in-time integration with PFASST</a> of pySDC v2,
 while the original code can be found under <a class="reference external" href="https://doi.org/10.5281/zenodo.32765">pySDC: Fault-tolerant PFASST</a>.
 Note that due to the long runtime, the results are not generated via CI. Only the visualization (and therefore the existence of the data files) is tested.</p>
-<div class="section" id="propagation-of-a-single-node-failure">
+<section id="propagation-of-a-single-node-failure">
 <h2>Propagation of a single node failure<a class="headerlink" href="#propagation-of-a-single-node-failure" title="Permalink to this headline">¶</a></h2>
 <p>We start by analyzing the propagation and containment of a single fault at step 7, iteration 7, see <code class="docutils literal notranslate"><span class="pre">hard_faults_detail</span></code>.
 We do this for the heat and advection equation, both in 1D.
@@ -207,7 +209,7 @@ Four different strategies are tested:</p>
             <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">extract_stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">step</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">process</span>
                 <span class="nb">iter</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">iter</span>
-                <span class="k">if</span> <span class="nb">iter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">iter</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
                     <span class="n">residual</span><span class="p">[</span><span class="nb">iter</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
             <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="s1">&#39;data/&#39;</span> <span class="o">+</span> <span class="n">setup</span> <span class="o">+</span> <span class="s1">&#39;_steps_vs_iteration_hf_&#39;</span> <span class="o">+</span> <span class="n">strategy</span><span class="p">,</span> <span class="n">residual</span><span class="o">=</span><span class="n">residual</span><span class="p">,</span> <span class="n">ft_step</span><span class="o">=</span><span class="n">ft</span><span class="o">.</span><span class="n">hard_step</span><span class="p">,</span>
@@ -240,8 +242,8 @@ Four different strategies are tested:</p>
 <a class="reference internal image-reference" href="../_images/ADVECTION_steps_vs_iteration_hf_7x7_INTERP.png"><img alt="../_images/ADVECTION_steps_vs_iteration_hf_7x7_INTERP.png" src="../_images/ADVECTION_steps_vs_iteration_hf_7x7_INTERP.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/ADVECTION_steps_vs_iteration_hf_7x7_INTERP_PREDICT.png"><img alt="../_images/ADVECTION_steps_vs_iteration_hf_7x7_INTERP_PREDICT.png" src="../_images/ADVECTION_steps_vs_iteration_hf_7x7_INTERP_PREDICT.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/ADVECTION_residuals_allstrategies.png"><img alt="../_images/ADVECTION_residuals_allstrategies.png" src="../_images/ADVECTION_residuals_allstrategies.png" style="width: 33%;" /></a>
-</div>
-<div class="section" id="node-failures-at-different-steps-and-iterations">
+</section>
+<section id="node-failures-at-different-steps-and-iterations">
 <h2>Node failures at different steps and iterations<a class="headerlink" href="#node-failures-at-different-steps-and-iterations" title="Permalink to this headline">¶</a></h2>
 <p>The next step is to check how faults impact the convergence of PFASST at different steps and iterations.
 We systematically study this in <code class="docutils literal notranslate"><span class="pre">hard_faults_test</span></code>, where for the heat and the advection equation each combination of step and iteraston is tested separately.
@@ -434,8 +436,8 @@ Heat maps generated by <code class="docutils literal notranslate"><span class="p
 <a class="reference internal image-reference" href="../_images/ADVECTION_iteration_counts_hf_SPREAD_PREDICT.png"><img alt="../_images/ADVECTION_iteration_counts_hf_SPREAD_PREDICT.png" src="../_images/ADVECTION_iteration_counts_hf_SPREAD_PREDICT.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/ADVECTION_iteration_counts_hf_INTERP.png"><img alt="../_images/ADVECTION_iteration_counts_hf_INTERP.png" src="../_images/ADVECTION_iteration_counts_hf_INTERP.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/ADVECTION_iteration_counts_hf_INTERP_PREDICT.png"><img alt="../_images/ADVECTION_iteration_counts_hf_INTERP_PREDICT.png" src="../_images/ADVECTION_iteration_counts_hf_INTERP_PREDICT.png" style="width: 19%;" /></a>
-</div>
-<div class="section" id="the-boussinesq-test-case">
+</section>
+<section id="the-boussinesq-test-case">
 <h2>The Boussinesq test case<a class="headerlink" href="#the-boussinesq-test-case" title="Permalink to this headline">¶</a></h2>
 <p>A first, more complex test case is the semi-implicit 2D Boussinesq system (order-coarsening only), see <code class="docutils literal notranslate"><span class="pre">boussinesq_example</span></code>.
 We inject faults randomly with a rate of 3%, i.e. in 3% of all fine sweeps a node fails.
@@ -569,7 +571,7 @@ The <code class="docutils literal notranslate"><span class="pre">postproc_boussi
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">extract_stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">step</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">process</span>
             <span class="nb">iter</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">iter</span>
-            <span class="k">if</span> <span class="nb">iter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">iter</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
                 <span class="n">residual</span><span class="p">[</span><span class="nb">iter</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 
         <span class="c1"># stats magic: get niter (probably redundant with maxiter)</span>
@@ -598,8 +600,8 @@ The <code class="docutils literal notranslate"><span class="pre">postproc_boussi
 <a class="reference internal image-reference" href="../_images/BOUSSINESQ_steps_vs_iteration_hf_INTERP_PREDICT.png"><img alt="../_images/BOUSSINESQ_steps_vs_iteration_hf_INTERP_PREDICT.png" src="../_images/BOUSSINESQ_steps_vs_iteration_hf_INTERP_PREDICT.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/BOUSSINESQ_steps_vs_iteration_hf_INTERP_PREDICT.png"><img alt="../_images/BOUSSINESQ_steps_vs_iteration_hf_INTERP_PREDICT.png" src="../_images/BOUSSINESQ_steps_vs_iteration_hf_INTERP_PREDICT.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/BOUSSINESQ_Kadd_vs_NOFAULT_hf.png"><img alt="../_images/BOUSSINESQ_Kadd_vs_NOFAULT_hf.png" src="../_images/BOUSSINESQ_Kadd_vs_NOFAULT_hf.png" style="width: 33%;" /></a>
-</div>
-<div class="section" id="the-gray-scott-test-case">
+</section>
+<section id="the-gray-scott-test-case">
 <h2>The Gray-Scott test case<a class="headerlink" href="#the-gray-scott-test-case" title="Permalink to this headline">¶</a></h2>
 <p>Another test case is the 1D Gray-Scott reaction diffusion model, see <code class="docutils literal notranslate"><span class="pre">grayscott_example</span></code>.
 With spatial coarsening enabled, this application plays well with PFASST and the goal of this part is to see how fault injections and recovery impact the convergence.
@@ -730,7 +732,7 @@ The <code class="docutils literal notranslate"><span class="pre">postproc_graysc
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">extract_stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">step</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">process</span>
             <span class="nb">iter</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">iter</span>
-            <span class="k">if</span> <span class="nb">iter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">iter</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
                 <span class="n">residual</span><span class="p">[</span><span class="nb">iter</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 
         <span class="c1"># stats magic: get niter (probably redundant with maxiter)</span>
@@ -759,10 +761,11 @@ The <code class="docutils literal notranslate"><span class="pre">postproc_graysc
 <a class="reference internal image-reference" href="../_images/GRAYSCOTT_steps_vs_iteration_hf_INTERP_PREDICT.png"><img alt="../_images/GRAYSCOTT_steps_vs_iteration_hf_INTERP_PREDICT.png" src="../_images/GRAYSCOTT_steps_vs_iteration_hf_INTERP_PREDICT.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/GRAYSCOTT_steps_vs_iteration_hf_INTERP_PREDICT.png"><img alt="../_images/GRAYSCOTT_steps_vs_iteration_hf_INTERP_PREDICT.png" src="../_images/GRAYSCOTT_steps_vs_iteration_hf_INTERP_PREDICT.png" style="width: 19%;" /></a>
 <a class="reference internal image-reference" href="../_images/GRAYSCOTT_Kadd_vs_NOFAULT_hf.png"><img alt="../_images/GRAYSCOTT_Kadd_vs_NOFAULT_hf.png" src="../_images/GRAYSCOTT_Kadd_vs_NOFAULT_hf.png" style="width: 33%;" /></a>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -796,7 +799,7 @@ The <code class="docutils literal notranslate"><span class="pre">postproc_graysc
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
@@ -821,12 +824,13 @@ The <code class="docutils literal notranslate"><span class="pre">postproc_graysc
         <li class="right" >
           <a href="parallelSDC.html" title="Attempts to parallelize SDC"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">pySDC 4.2.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Fault-tolerance with PFASST: node failures</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Robert Speck.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>
