@@ -1017,6 +1017,59 @@ know about other levels.</p>
 </dd></dl>
 
 </section>
+<section id="module-core.Nodes">
+<span id="core-nodes-module"></span><h2>core.Nodes module<a class="headerlink" href="#module-core.Nodes" title="Permalink to this headline">¶</a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="core.Nodes.NodesError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.Nodes.</span></span><span class="sig-name descname"><span class="pre">NodesError</span></span><a class="reference internal" href="../_modules/core/Nodes.html#NodesError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.Nodes.NodesError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="core.Nodes.NodesGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.Nodes.</span></span><span class="sig-name descname"><span class="pre">NodesGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LEGENDRE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quad_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LOBATTO'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/Nodes.html#NodesGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.Nodes.NodesGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.Nodes.NodesGenerator.evalOrthogPoly">
+<span class="sig-name descname"><span class="pre">evalOrthogPoly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/Nodes.html#NodesGenerator.evalOrthogPoly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.Nodes.NodesGenerator.evalOrthogPoly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the two higher order orthogonal polynomials corresponding
+to the given (alpha,beta) coefficients.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>TYPE</em>) – DESCRIPTION.</p></li>
+<li><p><strong>alpha</strong> (<em>TYPE</em>) – DESCRIPTION.</p></li>
+<li><p><strong>beta</strong> (<em>TYPE</em>) – DESCRIPTION.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>TYPE</em> – DESCRIPTION.</p></li>
+<li><p><em>TYPE</em> – DESCRIPTION.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.Nodes.NodesGenerator.getNodes">
+<span class="sig-name descname"><span class="pre">getNodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/Nodes.html#NodesGenerator.getNodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.Nodes.NodesGenerator.getNodes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.Nodes.NodesGenerator.getOrthogPolyCoefficients">
+<span class="sig-name descname"><span class="pre">getOrthogPolyCoefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_coeff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/Nodes.html#NodesGenerator.getOrthogPolyCoefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.Nodes.NodesGenerator.getOrthogPolyCoefficients" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.Nodes.NodesGenerator.getTridiagCoefficients">
+<span class="sig-name descname"><span class="pre">getTridiagCoefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_nodes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/Nodes.html#NodesGenerator.getTridiagCoefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.Nodes.NodesGenerator.getTridiagCoefficients" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="module-core.Problem">
 <span id="core-problem-module"></span><h2>core.Problem module<a class="headerlink" href="#module-core.Problem" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
@@ -1415,6 +1468,7 @@ and evaluates the RHS of the ODE there</p>
 <li><a class="reference internal" href="#module-core.Errors">core.Errors module</a></li>
 <li><a class="reference internal" href="#module-core.Hooks">core.Hooks module</a></li>
 <li><a class="reference internal" href="#module-core.Level">core.Level module</a></li>
+<li><a class="reference internal" href="#module-core.Nodes">core.Nodes module</a></li>
 <li><a class="reference internal" href="#module-core.Problem">core.Problem module</a></li>
 <li><a class="reference internal" href="#module-core.SpaceTransfer">core.SpaceTransfer module</a></li>
 <li><a class="reference internal" href="#module-core.Step">core.Step module</a></li>

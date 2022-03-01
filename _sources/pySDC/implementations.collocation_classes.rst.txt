@@ -68,6 +68,14 @@ implementations.collocation\_classes.gauss\_radau\_right module
    :undoc-members:
    :show-inheritance:
 
+implementations.collocation\_classes.generic module
+---------------------------------------------------
+
+.. automodule:: implementations.collocation_classes.generic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
