@@ -112,14 +112,31 @@
         <span class="n">circ_one</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
         <span class="n">tcks</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">):</span>
-            <span class="n">tcks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="n">intpl</span><span class="o">.</span><span class="n">splrep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">circ_one</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="n">xb</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tleft</span><span class="p">,</span> <span class="n">xe</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tright</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.0</span><span class="p">))</span>
+            <span class="n">tcks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">intpl</span><span class="o">.</span><span class="n">splrep</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">circ_one</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span>
+                <span class="n">xb</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tleft</span><span class="p">,</span> <span class="n">xe</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tright</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.0</span><span class="p">))</span>
 
         <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">):</span>
             <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">intpl</span><span class="o">.</span><span class="n">splint</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tcks</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
-        <span class="k">return</span> <span class="n">weights</span></div>
+        <span class="k">return</span> <span class="n">weights</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_gen_Qmatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute tleft-to-node integration matrix for later use in collocation formulation</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: matrix containing the weights for tleft to node</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># for all nodes, get weights for the interval [tleft,node]</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+            <span class="n">Q</span><span class="p">[</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getWeights</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tleft</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">Q</span></div>
 </pre></div>
 
             <div class="clearer"></div>
