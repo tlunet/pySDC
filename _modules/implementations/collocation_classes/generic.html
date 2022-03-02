@@ -51,9 +51,66 @@
 
 
 <div class="viewcode-block" id="Collocation"><a class="viewcode-back" href="../../../pySDC/implementations.collocation_classes.html#implementations.collocation_classes.generic.Collocation">[docs]</a><span class="k">class</span> <span class="nc">Collocation</span><span class="p">(</span><span class="n">CollBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generic collocation class alowing to produce many kind of quadrature nodes</span>
+<span class="sd">    from various distribution.</span>
+<span class="sd">    It is based on the two main parameters that define the nodes :</span>
+
+<span class="sd">    - node_type : the node distribution used for the collocation method</span>
+<span class="sd">    - quad_type : the type of quadrature used (inclusion of not of boundary)</span>
+
+<span class="sd">    Current implementation provides the following available parameter values</span>
+<span class="sd">    for node_type :</span>
+
+<span class="sd">    - EQUID : equidistant node distribution</span>
+<span class="sd">    - LEGENDRE : distribution from Legendre polynomials</span>
+<span class="sd">    - CHEBY-{1,2,3,4} : distribution from Chebyshev polynomials of a given kind</span>
+
+<span class="sd">    The type of quadrature cann be GAUSS (only inner nodes), RADAU-LEFT</span>
+<span class="sd">    (inclusion of the left boundary), RADAU-RIGHT (inclusion of the right</span>
+<span class="sd">    boundary) and LOBATTO (inclusion of left and right boundary).</span>
+
+<span class="sd">    Furthermore, the ``useSpline`` option can be activated to eventually use</span>
+<span class="sd">    spline interpolation when computing the weights.</span>
+
+<span class="sd">    Here is the equivalency table with the original classes implemented in</span>
+<span class="sd">    pySDC :</span>
+
+<span class="sd">    +-------------------------+-----------+-------------+-----------+</span>
+<span class="sd">    | Original Class          | node_type | quad_type   | useSpline |</span>
+<span class="sd">    +-------------------------+-----------+-------------+-----------+</span>
+<span class="sd">    | Equidistant             | EQUID     | LOBATTO     | False     |</span>
+<span class="sd">    +-------------------------+-----------+-------------+-----------+</span>
+<span class="sd">    | EquidistantInner        | EQUID     | GAUSS       | False     |</span>
+<span class="sd">    +-------------------------+-----------+-------------+-----------+</span>
+<span class="sd">    | EquidistantNoLeft       | EQUID     | RADAU-RIGHT | False     |</span>
+<span class="sd">    +-------------------------+-----------+-------------+-----------+</span>
+<span class="sd">    | EquidistantSpline_Right | EQUID     | RADAU-RIGHT | True      |</span>
+<span class="sd">    +-------------------------+-----------+-------------+-----------+</span>
+<span class="sd">    | CollGaussLegendre       | LEGENDRE  | GAUSS       | False     |</span>
+<span class="sd">    +-------------------------+-----------+-------------+-----------+</span>
+<span class="sd">    | CollGaussLobatto        | LEGENDRE  | LOBATTO     | False     |</span>
+<span class="sd">    +-------------------------+-----------+-------------+-----------+</span>
+<span class="sd">    | CollGaussRadau_Left     | LEGENDRE  | RADAU-LEFT  | False     |</span>
+<span class="sd">    +-------------------------+-----------+-------------+-----------+</span>
+<span class="sd">    | CollGaussRadau_Right    | LEGENDRE  | RADAU-RIGHT | False     |</span>
+<span class="sd">    +-------------------------+-----------+-------------+-----------+</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_nodes</span><span class="p">,</span> <span class="n">tleft</span><span class="p">,</span> <span class="n">tright</span><span class="p">,</span>
                  <span class="n">node_type</span><span class="o">=</span><span class="s1">&#39;LEGENDRE&#39;</span><span class="p">,</span> <span class="n">quad_type</span><span class="o">=</span><span class="s1">&#39;LOBATTO&#39;</span><span class="p">,</span> <span class="n">useSpline</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialization</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            num_nodes (int): number of nodes</span>
+<span class="sd">            tleft (float): left interval boundary (usually 0)</span>
+<span class="sd">            tright (float): right interval boundary (usually 1)</span>
+<span class="sd">            node_type (str): node distribution to use (default LEGENDRE)</span>
+<span class="sd">            quad_type (str): quadrature type to use (default LOBATTO)</span>
+<span class="sd">            useSpline (bool): wether or not use spline interpolation to compute</span>
+<span class="sd">                weights (default False)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Base constructor</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Collocation</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="n">tleft</span><span class="p">,</span> <span class="n">tright</span><span class="p">)</span>
         <span class="c1"># Instanciate attributes</span>
