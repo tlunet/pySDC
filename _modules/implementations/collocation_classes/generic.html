@@ -125,7 +125,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">num_nodes</span> <span class="o">-</span> <span class="mi">2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getNodes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getWeights</span><span class="p">(</span><span class="n">tleft</span><span class="p">,</span> <span class="n">tright</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Qmat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen_Qmatrix</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Qmat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen_Qmatrix_spline</span> <span class="k">if</span> <span class="n">useSpline</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen_Qmatrix</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Smat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen_Smatrix</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">delta_m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen_deltas</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">left_is_node</span> <span class="o">=</span> <span class="n">quad_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;LOBATTO&#39;</span><span class="p">,</span> <span class="s1">&#39;RADAU-LEFT&#39;</span><span class="p">]</span>
@@ -177,7 +177,23 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span><span class="p">):</span>
             <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">intpl</span><span class="o">.</span><span class="n">splint</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tcks</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
-        <span class="k">return</span> <span class="n">weights</span></div>
+        <span class="k">return</span> <span class="n">weights</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_gen_Qmatrix_spline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute tleft-to-node integration matrix for later use in collocation formulation</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: matrix containing the weights for tleft to node</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_nodes</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># for all nodes, get weights for the interval [tleft,node]</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+            <span class="n">Q</span><span class="p">[</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getWeights</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tleft</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">m</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">Q</span></div>
 </pre></div>
 
             <div class="clearer"></div>
